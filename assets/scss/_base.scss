@@ -1,0 +1,9 @@
+body {
+  @apply dark:bg-dark dark:text-dark-100 bg-body text-sm transition-colors;
+}
+
+input,
+textarea,
+select {
+  @apply focus:outline-none;
+}
