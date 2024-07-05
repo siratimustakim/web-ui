@@ -1108,7 +1108,19 @@ const verseList = [
     ],
   },
 ];
-const isRead = ref(false);
+const tabList = ref([
+  {
+    id: 1,
+    name: 'Meal',
+    value: 1,
+  },
+  {
+    id: 2,
+    name: 'Okuma',
+    value: 2,
+  },
+]);
+const activeTab = ref(1);
 const showSidebar = ref(false);
 
 const handleSurahDirection = (direction) => {
@@ -1139,23 +1151,17 @@ const handleSurahDirection = (direction) => {
         </button>
         <div class="tab-title">
           <button
+            v-for="tab in tabList"
+            :key="tab.id"
             type="button"
             class="tab-item"
-            :class="{ active: !isRead }"
-            @click="isRead = false"
+            :class="{ active: activeTab === tab.value }"
+            @click="activeTab = tab.value"
           >
-            Meal
-          </button>
-          <button
-            type="button"
-            class="tab-item"
-            :class="{ active: isRead }"
-            @click="isRead = true"
-          >
-            Okuma
+            {{ tab.name }}
           </button>
         </div>
-        <template v-if="!isRead">
+        <template v-if="activeTab === 1">
           <VerseCard v-for="verse in verseList" :key="verse.id" :data="verse" />
         </template>
         <div

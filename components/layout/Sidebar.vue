@@ -1,6 +1,5 @@
 <script setup>
 const emit = defineEmits(['close']);
-
 const route = useRoute();
 
 const surahList = [
@@ -932,11 +931,11 @@ const filteredSurahList = computed(() =>
 );
 
 const scrollToActiveItem = (data) => {
-  const activeData = data.find((item) =>
+  const activeItem = data.find((item) =>
     item.$el.classList.value.includes('highlight')
   );
 
-  activeData.$el.scrollIntoView({ block: 'center' });
+  activeItem.$el.scrollIntoView({ block: 'center' });
 };
 
 onMounted(async () => {
