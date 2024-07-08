@@ -962,9 +962,7 @@ onMounted(async () => {
       placeholder="Ara"
     />
     <div class="sidebar-inner">
-      <div
-        class="sidebar-list flex-1 border-r border-light pr-3.5 dark:border-dark-300"
-      >
+      <div class="sidebar-list flex-1 pr-2.5">
         <nuxt-link
           ref="surahItemsEl"
           v-for="surah in filteredSurahList"
@@ -976,7 +974,9 @@ onMounted(async () => {
           {{ surah.transliteratedName }}
         </nuxt-link>
       </div>
-      <div class="sidebar-list w-20 pr-3.5">
+      <div
+        class="sidebar-list w-20 border-l pl-2.5 border-light dark:border-dark-300 pr-2.5"
+      >
         <nuxt-link
           ref="verseItemsEl"
           v-for="verse in verseList"
@@ -1006,11 +1006,19 @@ onMounted(async () => {
   }
 
   &-inner {
-    @apply flex h-full flex-1 gap-3.5 overflow-hidden;
+    @apply flex h-full flex-1 gap-2.5 overflow-hidden;
   }
 
   &-list {
     @apply flex h-full max-h-full flex-col overflow-auto;
+
+    &::-webkit-scrollbar {
+      @apply bg-transparent w-2 rounded-full;
+
+      &-thumb {
+        @apply bg-primary/10 dark:bg-dark-300 rounded-full;
+      }
+    }
   }
 
   &-item {
