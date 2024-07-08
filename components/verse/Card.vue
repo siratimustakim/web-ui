@@ -4,8 +4,10 @@ defineProps(['data']);
 
 <template>
   <div class="verse-card">
-    <h1 class="verse-card-title mb-6">{{ data.textImlaeiSimple }}</h1>
-    <div class="flex flex-col gap-5">
+    <h1 class="verse-card-title mb-6">
+      {{ data.textImlaeiSimple }}
+    </h1>
+    <div class="flex flex-col gap-5 mb-6">
       <div
         v-for="translation in data.translations"
         :key="translation.id"
@@ -14,6 +16,18 @@ defineProps(['data']);
         <p class="text-base font-medium">{{ translation.text }}</p>
         <span class="text-dark-100"> - {{ translation.resourceName }}</span>
       </div>
+    </div>
+    <div class="verse-card-action">
+      <UTooltip text="Oynat">
+        <button type="button" class="verse-card-button">
+          <Icon name="ion:play-circle-outline" />
+        </button>
+      </UTooltip>
+      <UTooltip text="Bağlantıyı Kopyala">
+        <button type="button" class="verse-card-button">
+          <Icon name="weui:link-filled" />
+        </button>
+      </UTooltip>
     </div>
   </div>
 </template>
@@ -33,6 +47,14 @@ defineProps(['data']);
 
   &-title {
     @apply font-arabic text-4xl;
+  }
+
+  &-action {
+    @apply flex items-center justify-center gap-2.5 text-3xl;
+  }
+
+  &-button {
+    @apply hover:text-primary transition-colors;
   }
 }
 </style>
