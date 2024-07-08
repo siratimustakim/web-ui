@@ -1122,6 +1122,7 @@ const tabList = ref([
 ]);
 const activeTab = ref(1);
 const showSidebar = ref(false);
+const verseEl = ref([]);
 
 const handleSurahDirection = (direction) => {
   const currentSurahId = Number(route.params.id);
@@ -1129,6 +1130,10 @@ const handleSurahDirection = (direction) => {
   router.push(
     `/${direction === 'next' ? currentSurahId + 1 : currentSurahId - 1}?verse=1`
   );
+};
+
+const scrollToVerse = (verse) => {
+  verseEl.value[verse].$el.scrollIntoView({ behavior: 'smooth', block: 'end' });
 };
 </script>
 
@@ -1138,6 +1143,7 @@ const handleSurahDirection = (direction) => {
       class="sticky top-20 w-80"
       :class="{ visible: showSidebar }"
       @close="showSidebar = false"
+      @verse="scrollToVerse"
     />
     <div class="flex-1">
       <div class="mb-16">
@@ -1162,7 +1168,12 @@ const handleSurahDirection = (direction) => {
           </button>
         </div>
         <template v-if="activeTab === 1">
-          <VerseCard v-for="verse in verseList" :key="verse.id" :data="verse" />
+          <VerseCard
+            ref="verseEl"
+            v-for="verse in verseList"
+            :key="verse.id"
+            :data="verse"
+          />
         </template>
         <div
           v-else

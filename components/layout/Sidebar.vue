@@ -1,5 +1,5 @@
 <script setup>
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'verse']);
 const route = useRoute();
 
 const surahList = [
@@ -979,12 +979,15 @@ onMounted(async () => {
       >
         <nuxt-link
           ref="verseItemsEl"
-          v-for="verse in verseList"
+          v-for="(verse, i) in verseList"
           :key="verse"
           :to="`?verse=${verse}`"
           class="sidebar-item"
           :class="{ highlight: $route.query.verse == verse }"
-          @click="emit('close')"
+          @click="
+            emit('verse', i);
+            emit('close');
+          "
         >
           {{ verse }}
         </nuxt-link>
