@@ -1,5 +1,6 @@
 <script setup>
 const props = defineProps(['data']);
+const { playSurah } = useSurahStore();
 
 const isCopied = ref(false);
 
@@ -38,7 +39,11 @@ const copyLink = async () => {
       </div>
     </div>
     <div class="verse-card-action">
-      <button type="button" class="verse-card-button">
+      <button
+        type="button"
+        class="verse-card-button"
+        @click="playSurah(data.audioUrl, data.timestamps)"
+      >
         <Icon name="ion:play-circle-outline" />
       </button>
       <button
