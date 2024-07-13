@@ -4,10 +4,10 @@ defineProps(['data']);
 
 <template>
   <div class="verse-card">
-    <h1 class="verse-card-title mb-6">
+    <h1 class="verse-card-title mb-5">
       {{ data.textImlaeiSimple }}
     </h1>
-    <div class="flex flex-col gap-5 mb-6">
+    <div class="flex flex-col gap-5 mb-10">
       <div
         v-for="translation in data.translations"
         :key="translation.id"
@@ -18,16 +18,12 @@ defineProps(['data']);
       </div>
     </div>
     <div class="verse-card-action">
-      <UTooltip text="Oynat">
-        <button type="button" class="verse-card-button">
-          <Icon name="ion:play-circle-outline" />
-        </button>
-      </UTooltip>
-      <UTooltip text="Bağlantıyı Kopyala">
-        <button type="button" class="verse-card-button">
-          <Icon name="weui:link-filled" />
-        </button>
-      </UTooltip>
+      <button type="button" class="verse-card-button">
+        <Icon name="ion:play-circle-outline" />
+      </button>
+      <button type="button" class="verse-card-button">
+        <Icon name="weui:link-filled" />
+      </button>
     </div>
   </div>
 </template>
@@ -37,12 +33,12 @@ defineProps(['data']);
   @apply relative text-center;
 
   &:not(:last-child) {
-    @apply mb-10 pb-10;
+    @apply mb-10;
+  }
 
-    &::after {
-      @apply absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-body via-light to-body dark:from-dark dark:via-dark-300 dark:to-dark;
-      content: '';
-    }
+  &::after {
+    @apply absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-body via-light to-body dark:from-dark dark:via-dark-300 dark:to-dark;
+    content: '';
   }
 
   &-title {
@@ -50,7 +46,7 @@ defineProps(['data']);
   }
 
   &-action {
-    @apply flex items-center justify-center gap-2.5 text-3xl;
+    @apply flex items-center justify-center text-3xl border-light rounded-tl-2xl rounded-tr-2xl border-t border-l border-r w-fit mx-auto py-1.5 px-8 gap-6 dark:border-dark-300;
   }
 
   &-button {

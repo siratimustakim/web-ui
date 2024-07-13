@@ -2,7 +2,12 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/scss/main.scss'],
-  modules: ['@pinia/nuxt', 'nuxt-icon', '@nuxtjs/color-mode', '@nuxt/ui'],
+  modules: [
+    '@pinia/nuxt',
+    '@nuxtjs/tailwindcss',
+    'nuxt-icon',
+    '@nuxtjs/color-mode',
+  ],
   colorMode: {
     classSuffix: '',
     storageKey: 'theme',
