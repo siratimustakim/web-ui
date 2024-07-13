@@ -1135,6 +1135,11 @@ const handleSurahDirection = (direction) => {
 const scrollToVerse = (verse) => {
   verseEl.value[verse].$el.scrollIntoView({ behavior: 'smooth', block: 'end' });
 };
+
+onMounted(async () => {
+  await nextTick();
+  scrollToVerse(route.query.verse - 1);
+});
 </script>
 
 <template>

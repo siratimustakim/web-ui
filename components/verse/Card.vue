@@ -1,5 +1,25 @@
 <script setup>
-defineProps(['data']);
+const props = defineProps(['data']);
+
+const isCopied = ref(false);
+
+const copyLink = async () => {
+  const route = window.location;
+
+  isCopied.value = true;
+
+  try {
+    await navigator.clipboard.writeText(
+      `${route.origin}${route.pathname}?verse=${props.data.verseNumber}`
+    );
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setTimeout(() => {
+      isCopied.value = false;
+    }, 1500);
+  }
+};
 </script>
 
 <template>
@@ -21,8 +41,13 @@ defineProps(['data']);
       <button type="button" class="verse-card-button">
         <Icon name="ion:play-circle-outline" />
       </button>
-      <button type="button" class="verse-card-button">
-        <Icon name="weui:link-filled" />
+      <button
+        type="button"
+        class="verse-card-button"
+        :class="{ 'text-primary': isCopied }"
+        @click="copyLink"
+      >
+        <Icon :name="isCopied ? 'ci:check-big' : 'weui:link-filled'" />
       </button>
     </div>
   </div>
