@@ -29,7 +29,7 @@ const { surah } = storeToRefs(useSurahStore());
 
     &::-webkit-media-controls-play-button,
     &::-webkit-media-controls-panel {
-      @apply bg-body dark:bg-dark-300;
+      @apply bg-body dark:bg-[#d2d1cc];
     }
   }
 }
