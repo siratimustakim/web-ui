@@ -25,50 +25,58 @@ const copyLink = async () => {
 
 <template>
   <div class="verse-card">
-    <h1 class="verse-card-title mb-5">
-      {{ data.textImlaeiSimple }}
-    </h1>
-    <div class="flex flex-col gap-5 mb-10">
-      <div
-        v-for="translation in data.translations"
-        :key="translation.id"
-        class="flex flex-col gap-1"
-      >
-        <p class="text-base font-medium">{{ translation.text }}</p>
-        <span class="text-dark-100"> - {{ translation.resourceName }}</span>
+    <div class="verse-card-inner">
+      <div class="verse-card-action">
+        <button
+          type="button"
+          class="verse-card-button"
+          @click="playSurah(data.audioUrl, data.timestamps)"
+        >
+          <Icon name="bi:play" />
+        </button>
+        <button
+          type="button"
+          class="verse-card-button"
+          :class="{ 'text-primary !border-primary': isCopied }"
+          @click="copyLink"
+        >
+          <Icon :name="isCopied ? 'ci:check-big' : 'weui:link-filled'" />
+        </button>
       </div>
-    </div>
-    <div class="verse-card-action">
-      <button
-        type="button"
-        class="verse-card-button"
-        @click="playSurah(data.audioUrl, data.timestamps)"
-      >
-        <Icon name="ion:play-circle-outline" />
-      </button>
-      <button
-        type="button"
-        class="verse-card-button"
-        :class="{ 'text-primary': isCopied }"
-        @click="copyLink"
-      >
-        <Icon :name="isCopied ? 'ci:check-big' : 'weui:link-filled'" />
-      </button>
+      <div class="flex-1">
+        <h1 class="verse-card-title mb-8" dir="rtl">
+          {{ data.textImlaeiSimple }}
+        </h1>
+        <div class="flex flex-col gap-5 max-sm:text-sm">
+          <div
+            v-for="translation in data.translations"
+            :key="translation.id"
+            class="flex flex-col gap-1"
+          >
+            <p class="text-base font-medium">{{ translation.text }}</p>
+            <span class="text-dark-100"> - {{ translation.resourceName }}</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .verse-card {
-  @apply relative text-center;
+  @apply relative;
 
   &:not(:last-child) {
-    @apply mb-10;
+    @apply sm:mb-20 mb-8 pb-8 sm:pb-20;
+
+    &::after {
+      @apply absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-body via-light-200 to-body dark:from-dark dark:via-dark-800 dark:to-dark;
+      content: '';
+    }
   }
 
-  &::after {
-    @apply absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-body via-light to-body dark:from-dark dark:via-dark-300 dark:to-dark;
-    content: '';
+  &-inner {
+    @apply flex max-sm:flex-col-reverse items-start gap-5 sm:gap-10 max-w-2xl mx-auto;
   }
 
   &-title {
@@ -76,11 +84,15 @@ const copyLink = async () => {
   }
 
   &-action {
-    @apply flex items-center justify-center text-3xl border-light rounded-tl-2xl rounded-tr-2xl border-t border-l border-r w-fit mx-auto py-1.5 px-8 gap-6 dark:border-dark-300;
+    @apply flex sm:flex-col items-center justify-center gap-2.5;
   }
 
   &-button {
-    @apply hover:text-primary transition-colors;
+    @apply transition-colors border border-light dark:border-dark-300 text-lg sm:text-2xl rounded-full w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center;
+
+    &:hover {
+      @apply text-primary border-primary;
+    }
   }
 }
 </style>

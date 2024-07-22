@@ -18,11 +18,13 @@ export default {
         primary: '#507c5c',
         body: '#fffaec',
         light: '#f0efe0',
+        'light-200': '#d8d6af',
         dark: '#24262a',
         'dark-100': '#8f8f92',
         'gray-200': '#ebebed',
         'dark-300': '#2d2e33',
         'dark-500': '#282b30',
+        'dark-800': '#41434b',
         green: {
           50: '#f2f7f3',
           100: '#e0ebe1',
