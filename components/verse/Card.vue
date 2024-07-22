@@ -80,7 +80,7 @@ const copyLink = async () => {
   }
 
   &-title {
-    @apply font-arabic text-4xl leading-loose;
+    @apply text-4xl leading-loose;
   }
 
   &-action {

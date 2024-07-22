@@ -4478,7 +4478,7 @@ onMounted(async () => {
         </template>
         <div
           v-else
-          class="mx-auto max-w-2xl text-center font-arabic text-4xl leading-loose"
+          class="mx-auto max-w-2xl text-center text-4xl leading-loose"
           dir="rtl"
         >
           <VersePage v-for="verse in verseList" :key="verse.id" :data="verse" />
