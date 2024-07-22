@@ -43,17 +43,17 @@ const copyLink = async () => {
           <Icon :name="isCopied ? 'ci:check-big' : 'weui:link-filled'" />
         </button>
       </div>
-      <div class="flex-1">
+      <div class="flex-1 w-full">
         <h1 class="verse-card-title mb-8" dir="rtl">
           {{ data.textImlaeiSimple }}
         </h1>
-        <div class="flex flex-col gap-5 max-sm:text-sm">
+        <div class="flex flex-col gap-5">
           <div
             v-for="translation in data.translations"
             :key="translation.id"
             class="flex flex-col gap-1"
           >
-            <p class="text-base font-medium">{{ translation.text }}</p>
+            <p class="sm:text-base font-medium">{{ translation.text }}</p>
             <span class="text-dark-100"> - {{ translation.resourceName }}</span>
           </div>
         </div>
