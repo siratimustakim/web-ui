@@ -45,7 +45,7 @@ const copyLink = async () => {
       </div>
       <div class="flex-1 w-full">
         <h1 class="verse-card-title mb-8" dir="rtl">
-          {{ data.textImlaeiSimple }}
+          {{ data.text }}
         </h1>
         <div class="flex flex-col gap-5">
           <div
@@ -80,7 +80,7 @@ const copyLink = async () => {
   }
 
   &-title {
-    @apply font-arabic text-4xl;
+    @apply font-arabic text-4xl leading-loose;
   }
 
   &-action {

@@ -4,9 +4,9 @@ defineProps(['data']);
 
 <template>
   <span class="verse">
-    {{ data.textUthmani }}
+    {{ data.text }}
     <span class="verse-number">
-      {{ data.verseNumber }}
+      {{ data.arabicVerseNumber }}
     </span>
   </span>
 </template>
@@ -20,7 +20,7 @@ defineProps(['data']);
   }
 
   &-number {
-    @apply inline-flex h-12 w-12 items-center justify-center rounded-full border border-light text-2xl dark:border-dark-300;
+    @apply inline-flex h-12 w-12 items-center justify-center rounded-full border border-light-200 text-2xl dark:border-dark-300;
   }
 }
 </style>

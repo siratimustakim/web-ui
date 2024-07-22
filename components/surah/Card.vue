@@ -8,12 +8,8 @@ defineProps(['data']);
       {{ data.id }}
     </div>
     <div class="flex-1">
-      <h3 class="mb-1">
-        {{ data.transliteratedName }}
-      </h3>
-      <span class="text-gray-400">
-        {{ data.translatedName }} - {{ data.versesCount }} Ayahs
-      </span>
+      <h3 class="mb-1">{{ data.nameSimple }}</h3>
+      <span class="text-gray-400"> {{ data.versesCount }} Ayet </span>
     </div>
     <div class="surah-card-icon">
       <Icon name="uiw:right" />
