@@ -44,10 +44,13 @@ const copyLink = async () => {
         </button>
       </div>
       <div class="flex-1 w-full">
-        <h1 class="verse-card-title mb-8" dir="rtl">
+        <h1 class="verse-card-title mb-10" dir="rtl">
           {{ data.text }}
         </h1>
-        <div class="flex flex-col gap-5">
+        <div class="verse-card-number">
+          {{ data.verseKey }}
+        </div>
+        <div v-if="data.translations.length" class="flex flex-col gap-5 mt-4">
           <div
             v-for="translation in data.translations"
             :key="translation.id"
@@ -76,11 +79,15 @@ const copyLink = async () => {
   }
 
   &-inner {
-    @apply flex max-sm:flex-col-reverse items-start gap-5 sm:gap-10 max-w-2xl mx-auto;
+    @apply flex max-sm:flex-col-reverse items-start gap-5 sm:gap-20 max-w-2xl mx-auto;
+  }
+
+  &-number {
+    @apply rounded-full px-3 w-fit text-white bg-primary py-1;
   }
 
   &-title {
-    @apply text-4xl leading-loose;
+    @apply text-4xl leading-loose font-arabic;
   }
 
   &-action {

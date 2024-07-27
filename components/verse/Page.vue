@@ -13,7 +13,7 @@ defineProps(['data']);
 
 <style lang="scss" scoped>
 .verse {
-  @apply cursor-pointer whitespace-pre-wrap rounded p-1.5;
+  @apply cursor-pointer whitespace-pre-wrap rounded p-1.5 font-arabic;
 
   &:hover {
     @apply bg-light dark:bg-dark-300;

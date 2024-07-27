@@ -12,4 +12,9 @@ export default defineNuxtConfig({
     classSuffix: '',
     storageKey: 'theme',
   },
+  runtimeConfig: {
+    public: {
+      baseUrl: process.env.NUXT_API_BASE_URL,
+    },
+  },
 });
