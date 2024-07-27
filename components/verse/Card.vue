@@ -30,7 +30,7 @@ const copyLink = async () => {
         <button
           type="button"
           class="verse-card-button"
-          @click="playSurah(data.audioUrl, data.timestamps)"
+          @click="playSurah($route.params.id)"
         >
           <Icon name="bi:play" />
         </button>

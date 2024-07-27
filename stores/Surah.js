@@ -5,12 +5,14 @@ export const useSurahStore = defineStore('surahStore', {
     verseList: null,
   }),
   actions: {
-    playSurah(src, { timestampFrom }) {
-      const seconds = Math.floor((timestampFrom / 1000) % 60);
+    playSurah(id) {
+      const src =
+        this.surahList &&
+        this.surahList.find((surah) => surah.id === Number(id)).audioUrl;
 
       this.surah = {
         src,
-        timestamps: seconds,
+        timestamps: 0,
       };
     },
     closeSurahPlayer() {
