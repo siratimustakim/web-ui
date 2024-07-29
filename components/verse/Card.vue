@@ -1,6 +1,5 @@
 <script setup>
 const props = defineProps(['data']);
-const { playSurah } = useSurahStore();
 
 const isCopied = ref(false);
 
@@ -30,13 +29,6 @@ const copyLink = async () => {
         <button
           type="button"
           class="verse-card-button"
-          @click="playSurah($route.params.id)"
-        >
-          <Icon name="bi:play" />
-        </button>
-        <button
-          type="button"
-          class="verse-card-button"
           :class="{ 'text-primary !border-primary': isCopied }"
           @click="copyLink"
         >
@@ -46,8 +38,11 @@ const copyLink = async () => {
       <div class="flex-1 w-full">
         <h1 class="verse-card-title mb-10" dir="rtl">
           {{ data.text }}
+          <div class="verse-card-number">
+            {{ data.arabicVerseNumber }}
+          </div>
         </h1>
-        <div class="verse-card-number">
+        <div class="verse-card-key">
           {{ data.verseKey }}
         </div>
         <div v-if="data.translations.length" class="flex flex-col gap-5 mt-4">
@@ -82,8 +77,12 @@ const copyLink = async () => {
     @apply flex max-sm:flex-col-reverse items-start gap-5 sm:gap-20 max-w-2xl mx-auto;
   }
 
-  &-number {
+  &-key {
     @apply rounded-full px-3 w-fit text-white bg-primary py-1;
+  }
+
+  &-number {
+    @apply w-12 h-12 inline-flex items-center justify-center border border-black rounded-full mr-2.5 text-2xl;
   }
 
   &-title {

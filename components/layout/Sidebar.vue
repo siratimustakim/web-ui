@@ -66,7 +66,7 @@ onMounted(async () => {
           class="sidebar-item"
           activeClass="highlight"
         >
-          {{ surah.nameSimple }}
+          {{ surah.id }} - {{ surah.nameSimple }}
         </nuxt-link>
       </div>
       <div

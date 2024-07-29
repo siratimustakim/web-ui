@@ -56,21 +56,13 @@ onMounted(async () => {
 <template>
   <div class="my-6 flex items-start gap-10 px-4 sm:my-16">
     <LayoutSidebar
-      class="sticky top-20 w-80"
+      class="sticky top-20 w-[22rem]"
       :class="{ visible: showSidebar }"
       @close="showSidebar = false"
       @verse="scrollToVerse"
     />
     <div class="flex-1">
       <div class="mb-16">
-        <button
-          type="button"
-          class="mb-6 flex w-full items-center justify-center gap-1.5 text-base font-medium lg:hidden"
-          @click="showSidebar = true"
-        >
-          {{ currentSurahName }}
-          <Icon name="flowbite:angle-down-outline" class="text-xl" />
-        </button>
         <div class="tab-title">
           <button
             v-for="tab in tabList"
@@ -82,6 +74,34 @@ onMounted(async () => {
           >
             {{ tab.name }}
           </button>
+        </div>
+        <button
+          type="button"
+          class="mb-20 flex w-full items-center justify-center gap-1.5 text-xl font-medium"
+          @click="showSidebar = true"
+        >
+          {{ currentSurahName }}
+          <span class="lg:hidden text-xl">
+            <Icon name="flowbite:angle-down-outline" />
+          </span>
+        </button>
+        <div
+          class="flex items-center justify-between gap-4 max-w-2xl mx-auto mb-20"
+        >
+          <button
+            type="button"
+            class="flex items-center gap-2"
+            @click="surahStore.playSurah($route.params.id)"
+          >
+            <Icon name="ph:play-fill" class="text-lg" />
+            Sureyi Dinle
+          </button>
+          <div
+            v-if="!['1', '9'].includes($route.params.id)"
+            class="text-4xl font-arabic"
+          >
+            بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+          </div>
         </div>
         <template v-if="activeTab === 1 && verseList">
           <VerseCard
@@ -122,7 +142,7 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .tab {
   &-title {
-    @apply mx-auto mb-10 flex w-fit justify-center rounded-md border border-light p-2.5 dark:border-dark-300 lg:mb-20;
+    @apply mx-auto mb-10 flex w-fit justify-center rounded-md border border-light p-2.5 dark:border-dark-300;
   }
 
   &-item {
