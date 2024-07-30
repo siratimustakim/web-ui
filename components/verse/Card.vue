@@ -82,11 +82,11 @@ const copyLink = async () => {
   }
 
   &-number {
-    @apply w-12 h-12 inline-flex items-center justify-center border border-black rounded-full mr-2.5 text-2xl;
+    @apply w-9 h-9 sm:w-12 sm:h-12 inline-flex items-center justify-center border border-black rounded-full mr-2.5 text-2xl;
   }
 
   &-title {
-    @apply text-4xl leading-loose font-arabic;
+    @apply text-2xl sm:text-4xl leading-loose font-arabic;
   }
 
   &-action {

@@ -6,28 +6,47 @@ export const useSurahStore = defineStore('surahStore', {
     versePagination: 1,
   }),
   actions: {
-    playSurah(id) {
-      const src =
-        this.surahList &&
-        this.surahList.find((surah) => surah.id === Number(id)).audioUrl;
-
+    playSurah() {
       this.surahMedia = {
-        src,
+        src: this.getSurah().audioUrl,
         timestamps: 0,
       };
     },
     closeSurahPlayer() {
-      this.surah = null;
+      this.surahMedia = null;
+    },
+    getSurah() {
+      const route = useRoute();
+
+      return (
+        this.surahList &&
+        this.surahList.find((surah) => surah.id === Number(route.params.id))
+      );
+    },
+    resetVerseData() {
+      this.versePagination = 1;
+      this.verseList = [];
+    },
+    handleVersePagination() {
+      const scrolledTo = window.scrollY + window.innerHeight;
+      const isReachBottom = document.body.scrollHeight === scrolledTo;
+
+      if (isReachBottom && this.versePagination) {
+        this.getVerseList();
+      }
     },
     async getSurahList() {
       if (!this.surahList) {
         const {
           data: { value },
         } = await useFetchApi('/Chapter/List');
+
         this.surahList = value;
       }
     },
-    async getVerseList(id) {
+    async getVerseList() {
+      const route = useRoute();
+
       const {
         data: {
           value: {
@@ -36,14 +55,11 @@ export const useSurahStore = defineStore('surahStore', {
           },
         },
       } = await useFetchApi(
-        `/Verse/ChapterId/${id}?page_number=${this.versePagination}`
+        `/Verse/ChapterId/${route.params.id}?page_number=${this.versePagination}`
       );
+
       this.verseList = [...this.verseList, ...verses];
       this.versePagination = nextPage;
-    },
-    resetVerseData() {
-      this.versePagination = 1;
-      this.verseList = [];
     },
   },
 });

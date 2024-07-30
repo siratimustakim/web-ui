@@ -1,6 +1,5 @@
 <script setup>
 const emit = defineEmits(['close', 'verse']);
-const route = useRoute();
 
 const surahStore = useSurahStore();
 const { surahList } = storeToRefs(surahStore);
@@ -9,11 +8,7 @@ const search = ref('');
 const surahItemsEl = ref();
 const verseItemsEl = ref();
 
-const verseList = computed(
-  () =>
-    surahList.value &&
-    surahList.value.find((surah) => surah.id == route.params.id).versesCount
-);
+const verseList = computed(() => surahStore.getSurah().versesCount);
 
 const filteredSurahList = computed(
   () =>
@@ -51,8 +46,8 @@ onMounted(async () => {
     <input
       v-model="search"
       type="text"
-      class="sidebar-search"
       placeholder="Ara"
+      class="sidebar-search"
     />
     <div class="sidebar-inner">
       <div class="sidebar-list flex-1 pr-2.5">

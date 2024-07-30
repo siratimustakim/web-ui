@@ -1,6 +1,6 @@
 <script setup>
-const { surah } = storeToRefs(useSurahStore());
 const route = useRoute();
+const { surahMedia } = storeToRefs(useSurahStore());
 
 const isHomePage = computed(() => route.path === '/');
 </script>
@@ -17,5 +17,5 @@ const isHomePage = computed(() => route.path === '/');
     <NuxtPage />
   </div>
   <LayoutFooter />
-  <SurahPlayer v-if="surah" />
+  <SurahPlayer v-if="surahMedia" />
 </template>
