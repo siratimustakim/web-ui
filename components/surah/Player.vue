@@ -1,12 +1,12 @@
 <script setup>
 const { closeSurahPlayer } = useSurahStore();
-const { surah } = storeToRefs(useSurahStore());
+const { surahMedia } = storeToRefs(useSurahStore());
 </script>
 
 <template>
   <div class="surah-player">
     <audio
-      :src="`${surah.src}#t=${surah.timestamps}`"
+      :src="`${surahMedia.src}#t=${surahMedia.timestamps}`"
       controls
       autoplay
     ></audio>

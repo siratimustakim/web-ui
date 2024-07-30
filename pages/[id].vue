@@ -3,7 +3,7 @@ const router = useRouter();
 const route = useRoute();
 
 const surahStore = useSurahStore();
-const { surahList, verseList } = storeToRefs(surahStore);
+const { surahList, verseList, versePagination } = storeToRefs(surahStore);
 
 const tabList = ref([
   {
@@ -45,11 +45,23 @@ const currentSurahName = computed(
       .nameSimple
 );
 
-surahStore.getVerseList(route.params.id);
+const handleScroll = () => {
+  const scrolledTo = window.scrollY + window.innerHeight;
+  const isReachBottom = document.body.scrollHeight === scrolledTo;
+
+  if (isReachBottom && versePagination.value) {
+    surahStore.getVerseList(route.params.id);
+  }
+};
+
+surahStore.getSurahList();
 
 onMounted(async () => {
+  surahStore.resetVerseData();
+  surahStore.getVerseList(route.params.id);
   await nextTick();
   scrollToVerse(route.query.verse - 1);
+  window.addEventListener('scroll', handleScroll);
 });
 </script>
 
@@ -103,7 +115,7 @@ onMounted(async () => {
             بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
           </div>
         </div>
-        <template v-if="activeTab === 1 && verseList">
+        <template v-if="activeTab === 1 && verseList.length">
           <VerseCard
             ref="verseEl"
             v-for="verse in verseList"
@@ -112,7 +124,7 @@ onMounted(async () => {
           />
         </template>
         <div
-          v-else-if="activeTab === 2 && verseList"
+          v-else-if="activeTab === 2 && verseList.length"
           class="mx-auto max-w-2xl text-center text-4xl leading-loose"
           dir="rtl"
         >

@@ -2,6 +2,7 @@
 const surahStore = useSurahStore();
 const { surahList } = storeToRefs(surahStore);
 
+surahStore.resetVerseData();
 surahStore.getSurahList();
 </script>
 

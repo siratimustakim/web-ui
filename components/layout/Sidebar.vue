@@ -19,7 +19,7 @@ const filteredSurahList = computed(
   () =>
     surahList.value &&
     surahList.value.filter((surah) =>
-      surah.nameSimple.toLowerCase().includes(search.value.toLowerCase())
+      surah.searchableText.toLowerCase().includes(search.value.toLowerCase())
     )
 );
 
@@ -30,8 +30,6 @@ const scrollToActiveItem = (data) => {
 
   activeItem.$el.scrollIntoView({ block: 'center' });
 };
-
-surahStore.getSurahList();
 
 onMounted(async () => {
   await nextTick();

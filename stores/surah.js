@@ -1,8 +1,9 @@
 export const useSurahStore = defineStore('surahStore', {
   state: () => ({
-    surah: null,
+    surahMedia: null,
     surahList: null,
-    verseList: null,
+    verseList: [],
+    versePagination: 1,
   }),
   actions: {
     playSurah(id) {
@@ -10,7 +11,7 @@ export const useSurahStore = defineStore('surahStore', {
         this.surahList &&
         this.surahList.find((surah) => surah.id === Number(id)).audioUrl;
 
-      this.surah = {
+      this.surahMedia = {
         src,
         timestamps: 0,
       };
@@ -27,11 +28,22 @@ export const useSurahStore = defineStore('surahStore', {
       }
     },
     async getVerseList(id) {
-      this.verseList = null;
       const {
-        data: { value },
-      } = await useFetchApi(`/Verse/ChapterId/${id}`);
-      this.verseList = value;
+        data: {
+          value: {
+            verses,
+            pagination: { nextPage },
+          },
+        },
+      } = await useFetchApi(
+        `/Verse/ChapterId/${id}?page_number=${this.versePagination}`
+      );
+      this.verseList = [...this.verseList, ...verses];
+      this.versePagination = nextPage;
+    },
+    resetVerseData() {
+      this.versePagination = 1;
+      this.verseList = [];
     },
   },
 });
