@@ -55,7 +55,7 @@ onMounted(async () => {
 <template>
   <div class="surah-wrapper">
     <LayoutSidebar
-      class="sticky top-20 w-80 sm:w-[22rem]"
+      class="sticky top-20 w-full sm:w-[22rem]"
       :class="{ visible: showSidebar }"
       @close="showSidebar = false"
       @verse="scrollToVerse"
