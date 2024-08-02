@@ -38,10 +38,9 @@ const scrollToVerse = (verse) => {
   }
 };
 
-const currentSurahName = computed(() => surahStore.getSurah().nameSimple);
+const currentSurahName = computed(() => surahStore.getSurah()?.nameSimple);
 
 surahStore.resetVerseData();
-surahStore.getSurahList();
 surahStore.getVerseList();
 
 onMounted(async () => {
@@ -60,7 +59,7 @@ onMounted(async () => {
       @verse="scrollToVerse"
     />
     <div class="flex-1">
-      <div class="mb-16">
+      <div v-if="verseList.length" class="mb-16">
         <div class="surah-tab-title">
           <button
             v-for="tab in tabList"
@@ -95,7 +94,7 @@ onMounted(async () => {
             بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
           </div>
         </div>
-        <template v-if="activeTab === 1 && verseList.length">
+        <template v-if="activeTab === 1">
           <VerseCard
             ref="verseEl"
             v-for="verse in verseList"
@@ -103,15 +102,11 @@ onMounted(async () => {
             :data="verse"
           />
         </template>
-        <div
-          v-else-if="activeTab === 2 && verseList.length"
-          class="mx-auto max-w-6xl text-4xl leading-loose"
-          dir="rtl"
-        >
+        <div v-else class="mx-auto max-w-6xl text-4xl leading-loose" dir="rtl">
           <VersePage v-for="verse in verseList" :key="verse.id" :data="verse" />
         </div>
-        <Loader v-else class="py-10 sm:py-48" />
       </div>
+      <Loader v-else class="py-10 sm:py-48" />
       <div class="surah-footer">
         <BaseButton
           v-if="route.params.id > 1"

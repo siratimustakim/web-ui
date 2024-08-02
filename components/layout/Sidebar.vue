@@ -26,6 +26,8 @@ const scrollToActiveItem = (data) => {
   activeItem.$el.scrollIntoView({ block: 'center' });
 };
 
+surahStore.getSurahList();
+
 onMounted(async () => {
   await nextTick();
 
