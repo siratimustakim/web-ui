@@ -40,12 +40,11 @@ const scrollToVerse = (verse) => {
 
 const currentSurahName = computed(() => surahStore.getSurah().nameSimple);
 
+surahStore.resetVerseData();
 surahStore.getSurahList();
+surahStore.getVerseList();
 
 onMounted(async () => {
-  surahStore.resetVerseData();
-  surahStore.getVerseList();
-
   await nextTick();
   scrollToVerse(route.query.verse - 1);
   window.addEventListener('scroll', surahStore.handleVersePagination);
@@ -106,7 +105,7 @@ onMounted(async () => {
         </template>
         <div
           v-else-if="activeTab === 2 && verseList.length"
-          class="mx-auto max-w-2xl text-center text-4xl leading-loose"
+          class="mx-auto max-w-6xl text-4xl leading-loose"
           dir="rtl"
         >
           <VersePage v-for="verse in verseList" :key="verse.id" :data="verse" />
@@ -157,7 +156,7 @@ onMounted(async () => {
   }
 
   &-header {
-    @apply flex items-center justify-between gap-4 max-w-2xl mx-auto mb-20;
+    @apply flex items-center justify-between gap-4 max-w-6xl mx-auto mb-20;
   }
 
   &-footer {

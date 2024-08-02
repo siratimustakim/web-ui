@@ -106,7 +106,7 @@ const filteredSurahList = computed(
   }
 
   &-result {
-    @apply absolute top-full left-0 w-full p-6 rounded-md translate-y-4 bg-white z-10 shadow-xl;
+    @apply absolute top-full left-0 w-full p-6 rounded-md translate-y-4 bg-white dark:bg-dark z-10 shadow-xl;
   }
 
   &-list {
@@ -125,7 +125,7 @@ const filteredSurahList = computed(
     @apply px-4 sm:text-base block w-full text-left;
 
     &:not(:last-child) {
-      @apply pb-4 mb-4 border-b border-light;
+      @apply pb-4 mb-4 border-b border-light dark:border-dark-300;
     }
   }
 }

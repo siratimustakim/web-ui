@@ -74,7 +74,7 @@ const copyLink = async () => {
   }
 
   &-inner {
-    @apply flex max-sm:flex-col-reverse items-start gap-5 sm:gap-20 max-w-2xl mx-auto;
+    @apply flex max-sm:flex-col-reverse items-start gap-5 sm:gap-20 max-w-6xl mx-auto;
   }
 
   &-key {
@@ -82,7 +82,7 @@ const copyLink = async () => {
   }
 
   &-number {
-    @apply w-9 h-9 sm:w-12 sm:h-12 inline-flex items-center justify-center border border-black rounded-full mr-2.5 text-2xl;
+    @apply w-9 h-9 sm:w-12 sm:h-12 inline-flex items-center justify-center border border-black rounded-full dark:border-white/70 mr-2.5 text-2xl;
   }
 
   &-title {
