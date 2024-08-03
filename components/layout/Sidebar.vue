@@ -37,7 +37,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <aside class="sidebar">
+  <aside v-if="surahList" class="sidebar">
     <button
       type="button"
       class="ml-auto text-lg lg:hidden"

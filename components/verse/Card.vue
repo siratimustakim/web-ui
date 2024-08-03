@@ -1,22 +1,46 @@
 <script setup>
-const props = defineProps(['data']);
+const props = defineProps(['data', 'surahName']);
 
-const isCopied = ref(false);
+const verseActionList = ref([
+  {
+    id: 1,
+    tooltip: 'Linki Kopyala',
+    icon: 'weui:link-filled',
+    data: `${window?.location.origin}${window?.location.pathname}?verse=${props.data.verseNumber}`,
+    isCopied: false,
+  },
+  {
+    id: 2,
+    tooltip: 'Ayeti ve Meali Kopyala',
+    icon: 'mingcute:copy-line',
+    data: `
+${props.data.text}
 
-const copyLink = async () => {
-  const route = window.location;
+${props.data.translations[0]?.text}
+- (${props.data.translations[0]?.resourceName}, ${props.surahName} ${props.data.verseNumber}. Ayet)`,
+    isCopied: false,
+  },
+  {
+    id: 3,
+    tooltip: 'Meali Kopyala',
+    icon: 'ph:book-open-text',
+    data: `
+${props.data.translations[0]?.text}
+- (${props.data.translations[0]?.resourceName}, ${props.surahName} ${props.data.verseNumber}. Ayet)`,
+    isCopied: false,
+  },
+]);
 
-  isCopied.value = true;
+const handleCopy = async (data, i) => {
+  verseActionList.value[i].isCopied = true;
 
   try {
-    await navigator.clipboard.writeText(
-      `${route.origin}${route.pathname}?verse=${props.data.verseNumber}`
-    );
+    await navigator.clipboard.writeText(data);
   } catch (err) {
     console.error(err);
   } finally {
     setTimeout(() => {
-      isCopied.value = false;
+      verseActionList.value[i].isCopied = false;
     }, 1500);
   }
 };
@@ -27,12 +51,15 @@ const copyLink = async () => {
     <div class="verse-card-inner">
       <div class="verse-card-action">
         <button
+          v-for="(action, i) in verseActionList"
+          :key="action.id"
           type="button"
           class="verse-card-button"
-          :class="{ 'text-primary !border-primary': isCopied }"
-          @click="copyLink"
+          :class="{ 'text-primary !border-primary': action.isCopied }"
+          :title="action.tooltip"
+          @click="handleCopy(action.data, i)"
         >
-          <Icon :name="isCopied ? 'ci:check-big' : 'weui:link-filled'" />
+          <Icon :name="action.isCopied ? 'ci:check-big' : action.icon" />
         </button>
       </div>
       <div class="flex-1 w-full">

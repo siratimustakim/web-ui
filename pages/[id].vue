@@ -100,6 +100,7 @@ onMounted(async () => {
             v-for="verse in verseList"
             :key="verse.id"
             :data="verse"
+            :surahName="currentSurahName"
           />
         </template>
         <div v-else class="mx-auto max-w-6xl text-4xl leading-loose" dir="rtl">
