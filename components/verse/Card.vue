@@ -76,9 +76,8 @@ const handleCopy = async (data, i) => {
           <div
             v-for="translation in data.translations"
             :key="translation.id"
-            class="flex flex-col gap-1"
-          >
-            <p class="sm:text-base font-medium">{{ translation.text }}</p>
+            class="flex flex-col gap-1">
+            <p class="sm:text-xl font-medium">{{ translation.text }}</p>
             <span class="text-dark-100"> - {{ translation.resourceName }}</span>
           </div>
         </div>
