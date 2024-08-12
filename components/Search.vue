@@ -50,7 +50,7 @@ const goToSurah = (id) => {
               v-for="surah in searchChapterList"
               :key="surah.id"
               type="button"
-              class="search-item"
+              class="search-item font-medium"
               @click="goToSurah(surah.id)"
             >
               {{ surah.nameSimple }}
@@ -62,6 +62,10 @@ const goToSurah = (id) => {
               class="search-item"
               @click="goToSurah(verse.id)"
             >
+              <span class="mb-2 block font-medium">
+                {{ surahStore.getSurah(verse.chapterId)?.nameSimple }}
+                {{ verse.verseId }}. Ayet
+              </span>
               {{ verse.text }}
             </button>
           </div>

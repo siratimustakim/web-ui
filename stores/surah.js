@@ -17,12 +17,14 @@ export const useSurahStore = defineStore('surahStore', {
     closeSurahPlayer() {
       this.surahMedia = null;
     },
-    getSurah() {
+    getSurah(id) {
       const route = useRoute();
 
       return (
         this.surahList &&
-        this.surahList.find((surah) => surah.id === Number(route.params.id))
+        this.surahList.find(
+          (surah) => surah.id === Number(id || route.params.id)
+        )
       );
     },
     resetVerseData() {
