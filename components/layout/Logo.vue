@@ -1,9 +1,9 @@
 <template>
-  <nuxt-link to="/" class="logo"><p class="sm:text-2xl font-medium">siratimustakim.com</p></nuxt-link>
+  <nuxt-link to="/" class="logo">Sırat-ı Müstakim</nuxt-link>
 </template>
 
 <style lang="scss" scoped>
 .logo {
-  @apply text-lg;
+  @apply text-base font-medium;
 }
 </style>

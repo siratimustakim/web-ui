@@ -55,14 +55,14 @@ const handleCopy = async (data, i) => {
           :key="action.id"
           type="button"
           class="verse-card-button"
-          :class="{ 'text-primary !border-primary': action.isCopied }"
+          :class="{ '!border-primary text-primary': action.isCopied }"
           :title="action.tooltip"
           @click="handleCopy(action.data, i)"
         >
           <Icon :name="action.isCopied ? 'ci:check-big' : action.icon" />
         </button>
       </div>
-      <div class="flex-1 w-full">
+      <div class="w-full flex-1">
         <h1 class="verse-card-title mb-10" dir="rtl">
           {{ data.text }}
           <div class="verse-card-number">
@@ -72,12 +72,13 @@ const handleCopy = async (data, i) => {
         <div class="verse-card-key">
           {{ data.verseKey }}
         </div>
-        <div v-if="data.translations.length" class="flex flex-col gap-5 mt-4">
+        <div v-if="data.translations.length" class="mt-4 flex flex-col gap-5">
           <div
             v-for="translation in data.translations"
             :key="translation.id"
-            class="flex flex-col gap-1">
-            <p class="sm:text-xl font-medium">{{ translation.text }}</p>
+            class="flex flex-col gap-1"
+          >
+            <p class="font-medium sm:text-lg">{{ translation.text }}</p>
             <span class="text-dark-100"> - {{ translation.resourceName }}</span>
           </div>
         </div>
@@ -91,7 +92,7 @@ const handleCopy = async (data, i) => {
   @apply relative;
 
   &:not(:last-child) {
-    @apply sm:mb-20 mb-8 pb-8 sm:pb-20;
+    @apply mb-8 pb-8 sm:mb-20 sm:pb-20;
 
     &::after {
       @apply absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-body via-light-200 to-body dark:from-dark dark:via-dark-800 dark:to-dark;
@@ -100,30 +101,30 @@ const handleCopy = async (data, i) => {
   }
 
   &-inner {
-    @apply flex max-sm:flex-col-reverse items-start gap-5 sm:gap-20 max-w-6xl mx-auto;
+    @apply mx-auto flex max-w-6xl items-start gap-5 max-sm:flex-col-reverse sm:gap-20;
   }
 
   &-key {
-    @apply rounded-full px-3 w-fit text-white bg-primary py-1;
+    @apply w-fit rounded-full bg-primary px-3 py-1 text-white;
   }
 
   &-number {
-    @apply w-9 h-9 sm:w-12 sm:h-12 inline-flex items-center justify-center border border-black rounded-full dark:border-white/70 mr-2.5 text-2xl;
+    @apply mr-2.5 inline-flex h-9 w-9 items-center justify-center rounded-full border border-black text-2xl dark:border-white/70 sm:h-12 sm:w-12;
   }
 
   &-title {
-    @apply text-4xl leading-loose font-arabic;
+    @apply font-arabic text-4xl leading-loose;
   }
 
   &-action {
-    @apply flex sm:flex-col items-center justify-center gap-2.5;
+    @apply flex items-center justify-center gap-2.5 sm:flex-col;
   }
 
   &-button {
-    @apply transition-colors border border-light dark:border-dark-300 text-lg sm:text-2xl rounded-full w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center;
+    @apply flex h-9 w-9 items-center justify-center rounded-full border border-light text-lg transition-colors dark:border-dark-300 sm:h-12 sm:w-12 sm:text-2xl;
 
     &:hover {
-      @apply text-primary border-primary;
+      @apply border-primary text-primary;
     }
   }
 }
