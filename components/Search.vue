@@ -41,11 +41,14 @@ const goToSurah = (id) => {
           class="search-input"
           @input="surahStore.getSearchList(search)"
         />
-        <div v-if="search.length > 1" class="search-result">
-          <div
-            v-if="searchChapterList.length || searchVerseList.length"
-            class="search-list"
-          >
+        <div
+          v-if="
+            search.length > 1 &&
+            (searchChapterList.length || searchVerseList.length)
+          "
+          class="search-result"
+        >
+          <div class="search-list">
             <button
               v-for="surah in searchChapterList"
               :key="surah.id"
@@ -69,7 +72,6 @@ const goToSurah = (id) => {
               {{ verse.text }}
             </button>
           </div>
-          <div v-else class="search-item">Sonuç bulunamadı.</div>
         </div>
       </div>
       <div class="search-tag">

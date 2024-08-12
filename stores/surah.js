@@ -75,6 +75,9 @@ export const useSurahStore = defineStore('surahStore', {
 
         this.searchChapterList = chapters;
         this.searchVerseList = verses;
+      } else {
+        this.searchChapterList = [];
+        this.searchVerseList = [];
       }
     },
   },
