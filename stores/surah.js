@@ -3,6 +3,8 @@ export const useSurahStore = defineStore('surahStore', {
     surahMedia: null,
     surahList: null,
     verseList: [],
+    searchChapterList: [],
+    searchVerseList: [],
     versePagination: 1,
   }),
   actions: {
@@ -60,6 +62,18 @@ export const useSurahStore = defineStore('surahStore', {
 
       this.verseList = [...this.verseList, ...verses];
       this.versePagination = nextPage;
+    },
+    async getSearchList(value) {
+      if (value.toString().length > 1) {
+        const {
+          data: {
+            value: { chapters, verses },
+          },
+        } = await useFetchApi(`/Search/Get?text=${value}`);
+
+        this.searchChapterList = chapters;
+        this.searchVerseList = verses;
+      }
     },
   },
 });

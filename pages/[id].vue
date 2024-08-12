@@ -19,7 +19,6 @@ const tabList = ref([
 ]);
 const activeTab = ref(1);
 const showSidebar = ref(false);
-const verseEl = ref([]);
 
 const handleSurahDirection = (direction) => {
   const currentSurahId = Number(route.params.id);
@@ -29,23 +28,16 @@ const handleSurahDirection = (direction) => {
   );
 };
 
-const scrollToVerse = (verse) => {
-  if (verse) {
-    verseEl.value[verse].$el.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',
-    });
-  }
-};
-
 const currentSurahName = computed(() => surahStore.getSurah()?.nameSimple);
 
 surahStore.resetVerseData();
 surahStore.getVerseList();
 
-onMounted(async () => {
-  await nextTick();
-  scrollToVerse(route.query.verse - 1);
+useHead({
+  title: currentSurahName.value,
+});
+
+onMounted(() => {
   window.addEventListener('scroll', surahStore.handleVersePagination);
 });
 </script>
@@ -53,10 +45,9 @@ onMounted(async () => {
 <template>
   <div class="surah-wrapper">
     <LayoutSidebar
-      class="sticky top-20 w-full sm:w-[22rem]"
+      class="sticky top-20 w-full sm:w-80"
       :class="{ visible: showSidebar }"
       @close="showSidebar = false"
-      @verse="scrollToVerse"
     />
     <div class="flex-1">
       <div v-if="verseList.length" class="mb-16">
@@ -74,14 +65,14 @@ onMounted(async () => {
         </div>
         <button type="button" class="surah-name" @click="showSidebar = true">
           {{ currentSurahName }}
-          <span class="lg:hidden text-xl">
+          <span class="text-xl lg:hidden">
             <Icon name="flowbite:angle-down-outline" />
           </span>
         </button>
         <div class="surah-header">
           <button
             type="button"
-            class="flex items-center gap-2 sm:text-base font-medium"
+            class="flex items-center gap-2 font-medium sm:text-base"
             @click="surahStore.playSurah"
           >
             <Icon name="ph:play-fill" class="text-lg sm:text-xl" />
@@ -89,14 +80,13 @@ onMounted(async () => {
           </button>
           <div
             v-if="!['1', '9'].includes(route.params.id)"
-            class="text-2xl sm:text-4xl font-arabic"
+            class="font-arabic text-2xl sm:text-4xl"
           >
             بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
           </div>
         </div>
         <template v-if="activeTab === 1">
           <VerseCard
-            ref="verseEl"
             v-for="verse in verseList"
             :key="verse.id"
             :data="verse"
@@ -152,7 +142,7 @@ onMounted(async () => {
   }
 
   &-header {
-    @apply flex items-center justify-between gap-4 max-w-6xl mx-auto mb-20;
+    @apply mx-auto mb-20 flex max-w-6xl items-center justify-between gap-4;
   }
 
   &-footer {

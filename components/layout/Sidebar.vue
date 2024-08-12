@@ -1,14 +1,11 @@
 <script setup>
-const emit = defineEmits(['close', 'verse']);
+const emit = defineEmits(['close']);
 
 const surahStore = useSurahStore();
 const { surahList } = storeToRefs(surahStore);
 
 const search = ref('');
 const surahItemsEl = ref();
-const verseItemsEl = ref();
-
-const verseList = computed(() => surahStore.getSurah().versesCount);
 
 const filteredSurahList = computed(
   () =>
@@ -32,7 +29,6 @@ onMounted(async () => {
   await nextTick();
 
   scrollToActiveItem(surahItemsEl.value);
-  scrollToActiveItem(verseItemsEl.value);
 });
 </script>
 
@@ -51,37 +47,17 @@ onMounted(async () => {
       placeholder="Ara"
       class="sidebar-search"
     />
-    <div class="sidebar-inner">
-      <div class="sidebar-list flex-1 pr-2.5">
-        <nuxt-link
-          ref="surahItemsEl"
-          v-for="surah in filteredSurahList"
-          :key="surah.id"
-          :to="`/${surah.id}?verse=1`"
-          class="sidebar-item"
-          activeClass="highlight"
-        >
-          {{ surah.id }} - {{ surah.nameSimple }}
-        </nuxt-link>
-      </div>
-      <div
-        class="sidebar-list w-24 border-l pl-2.5 border-light dark:border-dark-300 pr-2.5"
+    <div class="sidebar-list pr-2.5">
+      <nuxt-link
+        ref="surahItemsEl"
+        v-for="surah in filteredSurahList"
+        :key="surah.id"
+        :to="`/${surah.id}?verse=1`"
+        class="sidebar-item"
+        activeClass="highlight"
       >
-        <nuxt-link
-          ref="verseItemsEl"
-          v-for="(verse, i) in verseList"
-          :key="verse"
-          :to="`?verse=${verse}`"
-          class="sidebar-item"
-          :class="{ highlight: $route.query.verse == verse }"
-          @click="
-            emit('verse', i);
-            emit('close');
-          "
-        >
-          {{ verse }}
-        </nuxt-link>
-      </div>
+        {{ surah.id }} - {{ surah.nameSimple }}
+      </nuxt-link>
     </div>
   </aside>
 </template>
@@ -98,18 +74,14 @@ onMounted(async () => {
     @apply w-full rounded-lg border border-light bg-transparent px-4 py-2.5 dark:border-dark-300;
   }
 
-  &-inner {
-    @apply flex h-full flex-1 gap-2.5 overflow-hidden;
-  }
-
   &-list {
-    @apply flex h-full max-h-full flex-col overflow-auto;
+    @apply flex h-full max-h-full flex-1 flex-col overflow-auto;
 
     &::-webkit-scrollbar {
-      @apply bg-transparent w-2 rounded-full;
+      @apply w-2 rounded-full bg-transparent;
 
       &-thumb {
-        @apply bg-primary/10 dark:bg-dark-300 rounded-full;
+        @apply rounded-full bg-primary/10 dark:bg-dark-300;
       }
     }
   }

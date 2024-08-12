@@ -1,7 +1,8 @@
 <script setup>
 const router = useRouter();
 
-const { surahList } = storeToRefs(useSurahStore());
+const surahStore = useSurahStore();
+const { searchChapterList, searchVerseList } = storeToRefs(surahStore);
 
 const search = ref('');
 const popularTagList = [
@@ -26,14 +27,6 @@ const popularTagList = [
 const goToSurah = (id) => {
   router.push(`/${id}?verse=1`);
 };
-
-const filteredSurahList = computed(
-  () =>
-    surahList.value &&
-    surahList.value.filter((surah) =>
-      surah.searchableText.toLowerCase().includes(search.value.toLowerCase())
-    )
-);
 </script>
 
 <template>
@@ -46,17 +39,30 @@ const filteredSurahList = computed(
           type="text"
           placeholder="Ara"
           class="search-input"
+          @input="surahStore.getSearchList(search)"
         />
         <div v-if="search.length > 1" class="search-result">
-          <div v-if="filteredSurahList.length" class="search-list">
+          <div
+            v-if="searchChapterList.length || searchVerseList.length"
+            class="search-list"
+          >
             <button
-              v-for="surah in filteredSurahList"
+              v-for="surah in searchChapterList"
               :key="surah.id"
               type="button"
               class="search-item"
               @click="goToSurah(surah.id)"
             >
               {{ surah.nameSimple }}
+            </button>
+            <button
+              v-for="verse in searchVerseList"
+              :key="verse.id"
+              type="button"
+              class="search-item"
+              @click="goToSurah(verse.id)"
+            >
+              {{ verse.text }}
             </button>
           </div>
           <div v-else class="search-item">Sonuç bulunamadı.</div>
@@ -79,7 +85,7 @@ const filteredSurahList = computed(
 
 <style lang="scss" scoped>
 .search {
-  @apply relative flex items-center gap-5 rounded-lg bg-white pl-5 dark:bg-dark sm:gap-8 sm:pl-8 shadow-xl;
+  @apply relative flex items-center gap-5 rounded-lg bg-white pl-5 shadow-xl dark:bg-dark sm:gap-8 sm:pl-8;
 
   &-overlay {
     @apply bg-primary py-16 dark:bg-dark-500 sm:py-44 xl:rounded-lg;
@@ -106,26 +112,26 @@ const filteredSurahList = computed(
   }
 
   &-result {
-    @apply absolute top-full left-0 w-full p-6 rounded-md translate-y-4 bg-white dark:bg-dark z-10 shadow-xl;
+    @apply absolute left-0 top-full z-10 w-full translate-y-4 rounded-md bg-white p-6 shadow-xl dark:bg-dark;
   }
 
   &-list {
     @apply max-h-52 overflow-auto pr-4;
 
     &::-webkit-scrollbar {
-      @apply bg-transparent w-2 rounded-full;
+      @apply w-2 rounded-full bg-transparent;
 
       &-thumb {
-        @apply bg-primary/10 dark:bg-dark-300 rounded-full;
+        @apply rounded-full bg-primary/10 dark:bg-dark-300;
       }
     }
   }
 
   &-item {
-    @apply px-4 sm:text-base block w-full text-left;
+    @apply block w-full px-4 text-left sm:text-base;
 
     &:not(:last-child) {
-      @apply pb-4 mb-4 border-b border-light dark:border-dark-300;
+      @apply mb-4 border-b border-light pb-4 dark:border-dark-300;
     }
   }
 }
