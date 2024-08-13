@@ -3,7 +3,7 @@ const router = useRouter();
 const route = useRoute();
 
 const surahStore = useSurahStore();
-const { verseList } = storeToRefs(surahStore);
+const { verseList, isVerseLoader, versePagination } = storeToRefs(surahStore);
 
 const tabList = ref([
   {
@@ -35,10 +35,6 @@ surahStore.getVerseList();
 
 useHead({
   title: currentSurahName.value,
-});
-
-onMounted(() => {
-  window.addEventListener('scroll', surahStore.handleVersePagination);
 });
 </script>
 
@@ -96,6 +92,24 @@ onMounted(() => {
         <div v-else class="mx-auto max-w-6xl text-4xl leading-loose" dir="rtl">
           <VersePage v-for="verse in verseList" :key="verse.id" :data="verse" />
         </div>
+        <button
+          v-if="versePagination"
+          type="button"
+          class="surah-more-button"
+          :class="{ 'pointer-events-none': isVerseLoader }"
+          @click="surahStore.getVerseList()"
+        >
+          Devamını oku
+          <Icon
+            :name="
+              isVerseLoader
+                ? 'ant-design:loading-outlined'
+                : 'fluent:chevron-down-32-filled'
+            "
+            class="text-2xl"
+            :class="{ 'animate-spin': isVerseLoader }"
+          />
+        </button>
       </div>
       <Loader v-else class="py-10 sm:py-48" />
       <div class="surah-footer">
@@ -147,6 +161,10 @@ onMounted(() => {
 
   &-footer {
     @apply flex justify-center gap-2 lg:gap-4;
+  }
+
+  &-more-button {
+    @apply mb-20 mt-10 flex w-full select-none flex-col items-center justify-center gap-1 text-base;
   }
 }
 </style>

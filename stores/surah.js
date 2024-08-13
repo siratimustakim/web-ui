@@ -6,6 +6,7 @@ export const useSurahStore = defineStore('surahStore', {
     searchChapterList: [],
     searchVerseList: [],
     versePagination: 1,
+    isVerseLoader: false,
   }),
   actions: {
     playSurah() {
@@ -31,14 +32,6 @@ export const useSurahStore = defineStore('surahStore', {
       this.versePagination = 1;
       this.verseList = [];
     },
-    handleVersePagination() {
-      const scrolledTo = window.scrollY + window.innerHeight;
-      const isReachBottom = document.body.scrollHeight === scrolledTo;
-
-      if (isReachBottom && this.versePagination) {
-        this.getVerseList();
-      }
-    },
     async getSurahList() {
       if (!this.surahList) {
         const {
@@ -51,19 +44,27 @@ export const useSurahStore = defineStore('surahStore', {
     async getVerseList() {
       const route = useRoute();
 
-      const {
-        data: {
-          value: {
-            verses,
-            pagination: { nextPage },
-          },
-        },
-      } = await useFetchApi(
-        `/Verse/ChapterId/${route.params.id}?page_number=${this.versePagination}`
-      );
+      try {
+        this.isVerseLoader = true;
 
-      this.verseList = [...this.verseList, ...verses];
-      this.versePagination = nextPage;
+        const {
+          data: {
+            value: {
+              verses,
+              pagination: { nextPage },
+            },
+          },
+        } = await useFetchApi(
+          `/Verse/ChapterId/${route.params.id}?page_number=${this.versePagination}`
+        );
+
+        this.verseList = [...this.verseList, ...verses];
+        this.versePagination = nextPage;
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.isVerseLoader = false;
+      }
     },
     async getSearchList(value) {
       if (value.toString().length > 1) {
