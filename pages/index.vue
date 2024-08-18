@@ -19,7 +19,7 @@ useHead({
         v-for="surah in surahList"
         :key="surah.id"
         :data="surah"
-        @click="$router.push(`/${surah.id}?verse=1`)"
+        @click="$router.push(`/${surah.id}`)"
       />
     </div>
     <Loader v-else class="py-10 sm:py-28" />

@@ -46,7 +46,7 @@ useHead({
       @close="showSidebar = false"
     />
     <div class="flex-1">
-      <div v-if="verseList.length" class="mb-16">
+      <div v-if="verseList.length" class="mb-10 sm:mb-20">
         <div class="surah-tab-title">
           <button
             v-for="tab in tabList"
@@ -81,35 +81,36 @@ useHead({
             بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
           </div>
         </div>
-        <template v-if="activeTab === 1">
+        <div v-if="activeTab === 1">
           <VerseCard
             v-for="verse in verseList"
             :key="verse.id"
             :data="verse"
             :surahName="currentSurahName"
           />
-        </template>
+        </div>
         <div v-else class="mx-auto max-w-6xl text-4xl leading-loose" dir="rtl">
           <VersePage v-for="verse in verseList" :key="verse.id" :data="verse" />
         </div>
-        <button
-          v-if="versePagination"
-          type="button"
-          class="surah-more-button"
-          :class="{ 'pointer-events-none': isVerseLoader }"
-          @click="surahStore.getVerseList()"
-        >
-          Devamını oku
-          <Icon
-            :name="
-              isVerseLoader
-                ? 'ant-design:loading-outlined'
-                : 'fluent:chevron-down-32-filled'
-            "
-            class="text-2xl"
-            :class="{ 'animate-spin': isVerseLoader }"
-          />
-        </button>
+        <div v-if="versePagination" class="surah-more">
+          <button
+            type="button"
+            class="surah-more-button"
+            :class="{ 'pointer-events-none': isVerseLoader }"
+            @click="surahStore.getVerseList()"
+          >
+            Devamını oku
+            <Icon
+              :name="
+                isVerseLoader
+                  ? 'ant-design:loading-outlined'
+                  : 'flowbite:angle-down-outline'
+              "
+              class="text-2xl"
+              :class="{ 'animate-spin': isVerseLoader }"
+            />
+          </button>
+        </div>
       </div>
       <Loader v-else class="py-10 sm:py-48" />
       <div class="surah-footer">
@@ -163,8 +164,17 @@ useHead({
     @apply flex justify-center gap-2 lg:gap-4;
   }
 
-  &-more-button {
-    @apply mb-20 mt-10 flex w-full select-none flex-col items-center justify-center gap-1 text-base;
+  &-more {
+    @apply relative z-10 mt-10 flex justify-center sm:mt-20;
+
+    &::after {
+      @apply absolute left-0 top-1/2 -z-10 h-px w-full -translate-y-1/2 bg-gradient-to-r from-body via-light-200 to-body dark:from-dark dark:via-dark-800 dark:to-dark;
+      content: '';
+    }
+
+    &-button {
+      @apply flex select-none flex-col items-center justify-center gap-1.5 bg-body px-10 text-base font-medium dark:bg-dark;
+    }
   }
 }
 </style>

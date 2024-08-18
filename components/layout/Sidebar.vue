@@ -52,7 +52,7 @@ onMounted(async () => {
         ref="surahItemsEl"
         v-for="surah in filteredSurahList"
         :key="surah.id"
-        :to="`/${surah.id}?verse=1`"
+        :to="`/${surah.id}`"
         class="sidebar-item"
         activeClass="highlight"
       >

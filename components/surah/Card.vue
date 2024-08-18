@@ -8,7 +8,7 @@ defineProps(['data']);
       {{ data.id }}
     </div>
     <div class="flex-1">
-      <h3 class="mb-1">{{ data.nameSimple }}</h3>
+      <h3 class="mb-1 font-medium sm:text-base">{{ data.nameSimple }}</h3>
       <span class="text-gray-400"> {{ data.versesCount }} Ayet </span>
     </div>
     <div class="surah-card-icon">
