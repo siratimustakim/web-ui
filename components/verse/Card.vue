@@ -1,12 +1,14 @@
 <script setup>
-const props = defineProps(['data', 'surahName']);
+const props = defineProps(['data', 'surahName', 'noMaxWidth']);
+
+const route = useRoute();
 
 const verseActionList = ref([
   {
     id: 1,
     tooltip: 'Linki Kopyala',
     icon: 'weui:link-filled',
-    data: `${window?.location.origin}${window?.location.pathname}?verse=${props.data.verseNumber}`,
+    data: `${window?.location.origin}${window?.location.pathname}${route.params.verse ? '' : `/${props.data.verseNumber}`}`,
     isCopied: false,
   },
   {
@@ -48,7 +50,7 @@ const handleCopy = async (data, i) => {
 
 <template>
   <div class="verse-card">
-    <div class="verse-card-inner">
+    <div class="verse-card-inner" :class="{ 'max-w-6xl': !noMaxWidth }">
       <div class="verse-card-action">
         <button
           v-for="(action, i) in verseActionList"
@@ -101,7 +103,7 @@ const handleCopy = async (data, i) => {
   }
 
   &-inner {
-    @apply mx-auto flex max-w-6xl items-start gap-5 max-sm:flex-col-reverse sm:gap-20;
+    @apply mx-auto flex items-start gap-5 max-sm:flex-col-reverse sm:gap-20;
   }
 
   &-key {

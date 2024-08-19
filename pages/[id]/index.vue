@@ -36,6 +36,12 @@ surahStore.getVerseList();
 useHead({
   title: currentSurahName.value,
 });
+
+onMounted(() => {
+  if (route.params.verse) {
+    router.push(`/${route.params.id}/${route.params.verse}`);
+  }
+});
 </script>
 
 <template>
