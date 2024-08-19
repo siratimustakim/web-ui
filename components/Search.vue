@@ -1,6 +1,4 @@
 <script setup>
-const router = useRouter();
-
 const surahStore = useSurahStore();
 const { searchChapterList, searchVerseList } = storeToRefs(surahStore);
 
@@ -23,10 +21,6 @@ const popularTagList = [
     name: 'Nisâ Suresi',
   },
 ];
-
-const goToSurah = (id) => {
-  router.push(`/${id}?verse=1`);
-};
 </script>
 
 <template>
@@ -54,7 +48,7 @@ const goToSurah = (id) => {
               :key="surah.id"
               type="button"
               class="search-item font-medium"
-              @click="goToSurah(surah.id)"
+              @click="$router.push(`/${surah.id}`)"
             >
               {{ surah.nameSimple }}
             </button>
@@ -63,7 +57,7 @@ const goToSurah = (id) => {
               :key="verse.id"
               type="button"
               class="search-item"
-              @click="goToSurah(verse.id)"
+              @click="$router.push(`/${verse.chapterId}/${verse.verseId}`)"
             >
               <span class="mb-2 block font-medium">
                 {{ surahStore.getSurah(verse.chapterId)?.nameSimple }}

@@ -65,9 +65,9 @@ const handleCopy = async (data, i) => {
       <div class="w-full flex-1">
         <h1 class="verse-card-title mb-10" dir="rtl">
           {{ data.text }}
-          <div class="verse-card-number">
+          <span class="verse-card-number">
             {{ data.arabicVerseNumber }}
-          </div>
+          </span>
         </h1>
         <div class="verse-card-key">
           {{ data.verseKey }}

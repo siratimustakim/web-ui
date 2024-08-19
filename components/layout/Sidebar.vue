@@ -48,7 +48,7 @@ onMounted(async () => {
       class="sidebar-search"
     />
     <div class="sidebar-list pr-2.5">
-      <nuxt-link
+      <NuxtLink
         ref="surahItemsEl"
         v-for="surah in filteredSurahList"
         :key="surah.id"
@@ -57,7 +57,7 @@ onMounted(async () => {
         activeClass="highlight"
       >
         {{ surah.id }} - {{ surah.nameSimple }}
-      </nuxt-link>
+      </NuxtLink>
     </div>
   </aside>
 </template>

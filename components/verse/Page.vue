@@ -20,7 +20,7 @@ defineProps(['data']);
   }
 
   &-number {
-    @apply inline-flex h-12 w-12 items-center justify-center rounded-full border border-black text-2xl whitespace-normal dark:border-white/70;
+    @apply inline-flex h-12 w-12 items-center justify-center whitespace-normal rounded-full border border-black text-2xl dark:border-white/70;
   }
 }
 </style>
