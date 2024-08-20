@@ -112,7 +112,7 @@ onMounted(() => {
                   ? 'ant-design:loading-outlined'
                   : 'flowbite:angle-down-outline'
               "
-              class="text-2xl"
+              class="text-xl sm:text-2xl"
               :class="{ 'animate-spin': isVerseLoader }"
             />
           </button>
@@ -179,7 +179,7 @@ onMounted(() => {
     }
 
     &-button {
-      @apply flex select-none flex-col items-center justify-center gap-1.5 bg-body px-10 text-base font-medium dark:bg-dark;
+      @apply flex select-none flex-col items-center justify-center gap-1.5 bg-body px-10 font-medium dark:bg-dark sm:text-base;
     }
   }
 }
