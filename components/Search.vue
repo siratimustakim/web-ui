@@ -74,7 +74,7 @@ const popularTagList = [
           :key="tag.id"
           type="button"
           class="search-tag-item"
-          @click="goToSurah(tag.id)"
+          @click="$router.push(`/${tag.id}`)"
         >
           {{ tag.name }}
         </button>

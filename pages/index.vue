@@ -4,10 +4,6 @@ const { surahList } = storeToRefs(surahStore);
 
 surahStore.resetVerseData();
 surahStore.getSurahList();
-
-useHead({
-  title: 'Sırat-ı Müstakim',
-});
 </script>
 
 <template>
