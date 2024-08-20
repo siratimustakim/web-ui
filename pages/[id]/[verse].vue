@@ -17,6 +17,10 @@ const verse = computed(
 versePagination.value = calculatePageNumber.value;
 surahStore.getVerseList();
 surahStore.getSurahList();
+
+useHead({
+  title: `${currentSurahName.value} ${route.params.verse}. Ayeti ve Meali`,
+});
 </script>
 
 <template>

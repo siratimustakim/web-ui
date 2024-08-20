@@ -5,7 +5,7 @@ const { surahMedia } = storeToRefs(useSurahStore());
 const isHomePage = computed(() => route.path === '/');
 
 useHead({
-  title: 'Sırat-ı Müstakim',
+  title: 'Sırat-ı Müstakim - Kuran Mealleri',
   meta: [
     {
       name: 'description',

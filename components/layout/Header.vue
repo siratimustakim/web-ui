@@ -12,8 +12,11 @@ onMounted(() => {
 
 <template>
   <header class="header" :class="{ 'sticky-top': isSticky }">
-    <div class="container flex items-center justify-between gap-2.5">
-      <LayoutLogo />
+    <div class="container flex items-center gap-4">
+      <LayoutLogo class="mr-auto" />
+      <button type="button" class="text-xl leading-normal">
+        <Icon name="oui:search" />
+      </button>
       <ThemeMode />
     </div>
   </header>
