@@ -24,6 +24,18 @@ const menuList = [
     id: '67',
     name: 'Mülk Suresi',
   },
+  {
+    id: '73',
+    name: 'Müzzemmil Suresi',
+  },
+  {
+    id: '72',
+    name: 'Cin Suresi',
+  },
+  {
+    id: '54',
+    name: 'Kamer Suresi',
+  },
 ];
 </script>
 
@@ -69,7 +81,7 @@ const menuList = [
   }
 
   &-menu {
-    @apply grid grid-cols-2 gap-x-6 gap-y-4;
+    @apply grid grid-cols-3 gap-x-6 gap-y-4;
   }
 
   &-link {
