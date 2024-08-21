@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    class="text-2xl leading-normal"
+    class="flex items-center text-2xl leading-normal"
     @click="
       $colorMode.preference =
         $colorMode.preference === 'dark' ? 'light' : 'dark'

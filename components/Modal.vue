@@ -34,7 +34,7 @@ const closeModal = () => {
   @apply fixed left-0 top-0 z-50 flex min-h-screen w-full items-center justify-center overflow-auto p-4;
 
   &-overlay {
-    @apply fixed left-0 top-0 -z-10 h-full w-full bg-gray-900/80;
+    @apply fixed left-0 top-0 -z-10 h-full w-full bg-gray-900/85;
   }
 }
 </style>

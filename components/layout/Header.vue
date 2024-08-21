@@ -30,7 +30,7 @@ onMounted(() => {
       <button
         v-if="!isHomePage"
         type="button"
-        class="text-2xl leading-normal"
+        class="flex items-center text-2xl leading-normal"
         @click="searchModal = true"
       >
         <Icon name="iconamoon:search-light" />
@@ -40,7 +40,6 @@ onMounted(() => {
   </header>
   <Modal v-model="searchModal" :noContentBg="true">
     <button
-      v-if="!noContentBg"
       type="button"
       class="mb-4 w-full pr-2.5 text-end text-3xl text-white"
       @click="searchModal = false"
@@ -56,7 +55,7 @@ onMounted(() => {
   @apply sticky top-0 z-20 border-b bg-body py-6 transition-all dark:bg-dark sm:z-40;
 
   &.sticky-top {
-    @apply border-b-light py-2.5 dark:border-b-dark-300;
+    @apply border-b-light py-4 dark:border-b-dark-300;
   }
 }
 </style>

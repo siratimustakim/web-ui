@@ -27,7 +27,7 @@ useHead({
   <div v-if="verse" class="container my-10 sm:my-20">
     <NuxtLink
       :to="`/${verse.chapterId}`"
-      class="mb-20 block text-center text-xl font-medium"
+      class="mb-10 block text-center text-xl font-medium sm:mb-20"
     >
       {{ currentSurahName }}
       {{ verse.verseNumber }}. Ayet
