@@ -7,7 +7,7 @@ surahStore.getSurahList();
 </script>
 
 <template>
-  <Search />
+  <Hero />
   <div class="container my-6 sm:my-16">
     <div class="mb-6 text-center text-lg font-semibold sm:text-2xl">Sure</div>
     <div v-if="surahList" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

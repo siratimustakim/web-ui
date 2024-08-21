@@ -1,4 +1,6 @@
 <script setup>
+const emit = defineEmits(['close']);
+
 const surahStore = useSurahStore();
 const { searchChapterList, searchVerseList } = storeToRefs(surahStore);
 
@@ -21,79 +23,80 @@ const popularTagList = [
     name: 'Nisâ Suresi',
   },
 ];
+
+const handleClose = () => {
+  emit('close');
+};
 </script>
 
 <template>
-  <div class="search-overlay">
-    <div class="search-wrapper">
-      <div class="search mb-4">
-        <Icon name="ep:search" class="text-2xl sm:text-3xl" />
-        <input
-          v-model="search"
-          type="text"
-          placeholder="Ara"
-          class="search-input"
-          @input="surahStore.getSearchList(search)"
-        />
-        <div
-          v-if="
-            search.length > 1 &&
-            (searchChapterList.length || searchVerseList.length)
-          "
-          class="search-result"
-        >
-          <div class="search-list">
-            <button
-              v-for="surah in searchChapterList"
-              :key="surah.id"
-              type="button"
-              class="search-item font-medium"
-              @click="$router.push(`/${surah.id}`)"
-            >
-              {{ surah.nameSimple }}
-            </button>
-            <button
-              v-for="verse in searchVerseList"
-              :key="verse.id"
-              type="button"
-              class="search-item"
-              @click="$router.push(`/${verse.chapterId}/${verse.verseId}`)"
-            >
-              <span class="mb-2 block font-medium">
-                {{ surahStore.getSurah(verse.chapterId)?.nameSimple }}
-                {{ verse.verseId }}. Ayet
-              </span>
-              {{ verse.text }}
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="search-tag">
+  <div class="search mb-4">
+    <Icon name="ep:search" class="text-2xl sm:text-3xl" />
+    <input
+      v-model="search"
+      type="text"
+      placeholder="Ara"
+      class="search-input"
+      @input="surahStore.getSearchList(search)"
+    />
+    <div
+      v-if="
+        search.length > 1 &&
+        (searchChapterList.length || searchVerseList.length)
+      "
+      class="search-result"
+    >
+      <div class="search-list">
         <button
-          v-for="tag in popularTagList"
-          :key="tag.id"
+          v-for="surah in searchChapterList"
+          :key="surah.id"
           type="button"
-          class="search-tag-item"
-          @click="$router.push(`/${tag.id}`)"
+          class="search-item font-medium"
+          @click="
+            $router.push(`/${surah.id}`);
+            handleClose();
+          "
         >
-          {{ tag.name }}
+          {{ surah.nameSimple }}
+        </button>
+        <button
+          v-for="verse in searchVerseList"
+          :key="verse.id"
+          type="button"
+          class="search-item"
+          @click="
+            $router.push(`/${verse.chapterId}/${verse.verseId}`);
+            handleClose();
+          "
+        >
+          <span class="mb-2 block font-medium">
+            {{ surahStore.getSurah(verse.chapterId)?.nameSimple }}
+            {{ verse.verseId }}. Ayet
+          </span>
+          {{ verse.text }}
         </button>
       </div>
     </div>
+  </div>
+  <div class="search-tag">
+    <button
+      v-for="tag in popularTagList"
+      :key="tag.id"
+      type="button"
+      class="search-tag-item"
+      @click="
+        $router.push(`/${tag.id}`);
+        handleClose();
+      "
+    >
+      {{ tag.name }}
+    </button>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .search {
   @apply relative flex items-center gap-5 rounded-lg bg-white pl-5 shadow-xl dark:bg-dark sm:gap-8 sm:pl-8;
-
-  &-overlay {
-    @apply bg-primary py-16 dark:bg-dark-500 sm:py-44 xl:rounded-lg;
-  }
-
-  &-wrapper {
-    @apply mx-auto max-w-5xl px-4;
-  }
 
   &-input {
     @apply h-full w-full flex-1 rounded-lg bg-transparent py-5 pr-5 text-base sm:py-8 sm:pr-8 sm:text-xl;
