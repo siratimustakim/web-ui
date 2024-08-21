@@ -111,7 +111,7 @@ const handleCopy = async (data, i) => {
   }
 
   &-number {
-    @apply mr-2.5 inline-flex h-9 w-9 items-center justify-center rounded-full border border-black text-2xl dark:border-white/70 sm:h-12 sm:w-12;
+    @apply mr-1.5 inline-flex h-12 w-12 items-center justify-center rounded-full border border-black text-2xl dark:border-white/70;
   }
 
   &-title {
