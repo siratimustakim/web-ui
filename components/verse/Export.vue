@@ -81,7 +81,47 @@ const exportVerse = async () => {
       :class="{ 'text-white': exportData.pattern.theme === 'dark' }"
       :style="{ backgroundImage: `url(${exportData.pattern.src})` }"
     >
-      <div class="export-preview-title" dir="rtl">
+      <div class="export-preview-title mb-10" dir="rtl">
+        {{ data.text }}
+      </div>
+      <p class="mb-4 text-lg">
+        {{ data.translations[0]?.text }}
+      </p>
+      <p class="mb-20 text-base">
+        ({{ data.translations[0]?.resourceName }}, {{ surahName }}
+        {{ data.verseNumber }}. Ayet)
+      </p>
+      <div class="text-center">siratimustakim.com</div>
+    </div>
+  </div>
+  <div class="overflow-hidden rounded-lg">
+    <div
+      ref="exportVerseEl"
+      class="export-preview overflow-hidden"
+      :class="{ 'text-white': exportData.pattern.theme === 'dark' }"
+      :style="{ backgroundImage: `url(${exportData.pattern.src})` }"
+    >
+      <div class="export-preview-title mb-10" dir="rtl">
+        {{ data.text }}
+      </div>
+      <p class="mb-4 text-lg">
+        {{ data.translations[0]?.text }}
+      </p>
+      <p class="mb-20 text-base">
+        ({{ data.translations[0]?.resourceName }}, {{ surahName }}
+        {{ data.verseNumber }}. Ayet)
+      </p>
+      <div class="text-center">siratimustakim.com</div>
+    </div>
+  </div>
+  <div class="overflow-hidden rounded-lg">
+    <div
+      ref="exportVerseEl"
+      class="export-preview overflow-hidden"
+      :class="{ 'text-white': exportData.pattern.theme === 'dark' }"
+      :style="{ backgroundImage: `url(${exportData.pattern.src})` }"
+    >
+      <div class="export-preview-title mb-10" dir="rtl">
         {{ data.text }}
       </div>
       <p class="mb-4 text-lg">
@@ -105,7 +145,7 @@ const exportVerse = async () => {
     @apply px-20 pb-6 pt-20;
 
     &-title {
-      @apply mb-10 font-arabic text-3xl;
+      @apply font-arabic text-4xl leading-loose;
     }
   }
 
