@@ -38,13 +38,13 @@ onMounted(() => {
       <ThemeMode />
     </div>
   </header>
-  <Modal v-model="searchModal" :noContentBg="true">
+  <Modal v-model="searchModal" :noContentBg="true" :noHeader="true">
     <button
       type="button"
-      class="mb-4 w-full pr-2.5 text-end text-3xl text-white"
+      class="mb-4 w-full pr-2.5 text-end text-2xl text-white"
       @click="searchModal = false"
     >
-      <Icon name="icon-park-outline:close" />
+      <Icon name="uiw:close" />
     </button>
     <Search @close="searchModal = false" />
   </Modal>

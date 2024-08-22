@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
+    "html2canvas": "^1.4.1",
     "nuxt": "^3.12.2",
     "pinia": "^2.1.7",
+    "slugify": "^1.6.6",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },

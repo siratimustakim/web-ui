@@ -3,6 +3,7 @@ const props = defineProps(['data', 'surahName', 'noMaxWidth']);
 
 const route = useRoute();
 
+const verseExportModal = ref(false);
 const verseActionList = ref([
   {
     id: 1,
@@ -63,6 +64,13 @@ const handleCopy = async (data, i) => {
         >
           <Icon :name="action.isCopied ? 'ci:check-big' : action.icon" />
         </button>
+        <button
+          type="button"
+          class="verse-card-button"
+          @click="verseExportModal = true"
+        >
+          <Icon name="hugeicons:image-download" />
+        </button>
       </div>
       <div class="w-full flex-1">
         <h1 class="verse-card-title mb-10" dir="rtl">
@@ -87,6 +95,9 @@ const handleCopy = async (data, i) => {
       </div>
     </div>
   </div>
+  <Modal v-model="verseExportModal" title="Ayet ve Meal Paylaş">
+    <VerseExport :data="data" :surahName="surahName" />
+  </Modal>
 </template>
 
 <style lang="scss" scoped>

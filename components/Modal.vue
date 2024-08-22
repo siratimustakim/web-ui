@@ -1,5 +1,5 @@
 <script setup>
-defineProps(['noContentBg']);
+defineProps(['title', 'noContentBg', 'noHeader']);
 const model = defineModel();
 
 const closeModal = () => {
@@ -14,14 +14,18 @@ const closeModal = () => {
         class="w-full max-w-5xl"
         :class="{ 'rounded-lg bg-white p-10': !noContentBg }"
       >
-        <button
-          v-if="!noContentBg"
-          type="button"
-          class="mb-10 ml-auto text-2xl"
-          @click="closeModal"
-        >
-          <Icon name="uiw:close" />
-        </button>
+        <div v-if="!noHeader" class="modal-header">
+          <div class="modal-title">
+            {{ title }}
+          </div>
+          <button
+            type="button"
+            class="ml-auto flex items-center text-2xl"
+            @click="closeModal"
+          >
+            <Icon name="uiw:close" />
+          </button>
+        </div>
         <slot></slot>
       </div>
       <div class="modal-overlay" @click="closeModal"></div>
@@ -35,6 +39,14 @@ const closeModal = () => {
 
   &-overlay {
     @apply fixed left-0 top-0 -z-10 h-full w-full bg-gray-900/85;
+  }
+
+  &-header {
+    @apply mb-10 flex items-center justify-between gap-4;
+  }
+
+  &-title {
+    @apply text-lg font-medium;
   }
 }
 </style>
