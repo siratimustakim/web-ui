@@ -1,5 +1,5 @@
 <script setup>
-defineProps(['title', 'noContentBg', 'noHeader']);
+defineProps(['title', 'noContentBg', 'noHeader', 'width']);
 const model = defineModel();
 
 const closeModal = () => {
@@ -12,9 +12,12 @@ const closeModal = () => {
     <div v-if="model" class="modal">
       <div
         class="modal-inner"
-        :class="{
-          'rounded-lg bg-white p-6 dark:bg-dark sm:p-10': !noContentBg,
-        }"
+        :class="[
+          {
+            'rounded-lg bg-white p-6 dark:bg-dark sm:p-10': !noContentBg,
+          },
+          width ? width : 'max-w-5xl',
+        ]"
       >
         <div v-if="!noHeader" class="modal-header">
           <div v-if="title" class="modal-title">
@@ -46,7 +49,7 @@ const closeModal = () => {
   }
 
   &-inner {
-    @apply flex max-h-full w-full max-w-5xl flex-col gap-5 sm:gap-10;
+    @apply flex max-h-full w-full flex-col gap-5 sm:gap-10;
   }
 
   &-header {
@@ -58,7 +61,7 @@ const closeModal = () => {
   }
 
   &-content {
-    @apply flex-1 overflow-auto;
+    @apply flex-1 overflow-y-auto;
 
     &::-webkit-scrollbar {
       @apply w-6 rounded-full bg-transparent;
