@@ -2,16 +2,26 @@
 defineProps(['title', 'noContentBg', 'noHeader', 'width']);
 const model = defineModel();
 
+const modalTopValue = ref(0);
+
 const closeModal = () => {
   model.value = false;
 };
 
-const calculatedScrollTop = computed(() => `${window.scrollY}px`);
+const handleScroll = (e) => {
+  if (!model.value) {
+    modalTopValue.value = window.scrollY;
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
 </script>
 
 <template>
   <teleport to="body">
-    <div v-if="model" class="modal" :style="{ top: calculatedScrollTop }">
+    <div v-if="model" class="modal" :style="{ top: `${modalTopValue}px` }">
       <div
         class="w-full"
         :class="[
