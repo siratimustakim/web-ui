@@ -5,43 +5,40 @@ import slugify from 'slugify';
 const props = defineProps(['data', 'surahName']);
 
 const exportVerseEl = ref();
-const exportOptions = ref({
-  patterns: [
-    {
-      id: 1,
-      src: '/vintage-wallpaper.webp',
-      theme: 'dark',
-    },
-    {
-      id: 2,
-      src: '/moroccan-flower-dark.png',
-      theme: 'dark',
-    },
-    {
-      id: 3,
-      src: '/country-quilt-dark.webp',
-      theme: 'dark',
-    },
-    {
-      id: 4,
-      src: '/lyonnette.png',
-    },
-    {
-      id: 5,
-      src: '/xv.webp',
-    },
-    {
-      id: 6,
-      src: '/micro_carbon.png',
-      theme: 'dark',
-    },
-  ],
-});
+const patterns = ref([
+  {
+    id: 1,
+    src: '/xv.webp',
+  },
+  {
+    id: 2,
+    src: '/lyonnette.png',
+  },
+  {
+    id: 3,
+    src: '/vintage-wallpaper.webp',
+    theme: 'dark',
+  },
+  {
+    id: 4,
+    src: '/moroccan-flower-dark.png',
+    theme: 'dark',
+  },
+  {
+    id: 5,
+    src: '/country-quilt-dark.webp',
+    theme: 'dark',
+  },
+  {
+    id: 6,
+    src: '/micro_carbon.png',
+    theme: 'dark',
+  },
+]);
 const exportData = ref({
   pattern: {
     id: 1,
-    src: '/vintage-wallpaper.webp',
-    theme: 'dark',
+    src: '/xv.webp',
   },
 });
 
@@ -60,7 +57,7 @@ const exportVerse = async () => {
 <template>
   <div class="mb-10 flex flex-wrap gap-4">
     <button
-      v-for="pattern in exportOptions.patterns"
+      v-for="pattern in patterns"
       :key="pattern.id"
       type="button"
       class="export-pattern"
@@ -73,46 +70,6 @@ const exportVerse = async () => {
         class="h-full w-full object-cover"
       />
     </button>
-  </div>
-  <div class="overflow-hidden rounded-lg">
-    <div
-      ref="exportVerseEl"
-      class="export-preview overflow-hidden"
-      :class="{ 'text-white': exportData.pattern.theme === 'dark' }"
-      :style="{ backgroundImage: `url(${exportData.pattern.src})` }"
-    >
-      <div class="export-preview-title mb-10" dir="rtl">
-        {{ data.text }}
-      </div>
-      <p class="mb-4 text-lg">
-        {{ data.translations[0]?.text }}
-      </p>
-      <p class="mb-20 text-base">
-        ({{ data.translations[0]?.resourceName }}, {{ surahName }}
-        {{ data.verseNumber }}. Ayet)
-      </p>
-      <div class="text-center">siratimustakim.com</div>
-    </div>
-  </div>
-  <div class="overflow-hidden rounded-lg">
-    <div
-      ref="exportVerseEl"
-      class="export-preview overflow-hidden"
-      :class="{ 'text-white': exportData.pattern.theme === 'dark' }"
-      :style="{ backgroundImage: `url(${exportData.pattern.src})` }"
-    >
-      <div class="export-preview-title mb-10" dir="rtl">
-        {{ data.text }}
-      </div>
-      <p class="mb-4 text-lg">
-        {{ data.translations[0]?.text }}
-      </p>
-      <p class="mb-20 text-base">
-        ({{ data.translations[0]?.resourceName }}, {{ surahName }}
-        {{ data.verseNumber }}. Ayet)
-      </p>
-      <div class="text-center">siratimustakim.com</div>
-    </div>
   </div>
   <div class="overflow-hidden rounded-lg">
     <div

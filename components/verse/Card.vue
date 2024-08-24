@@ -95,7 +95,7 @@ const handleCopy = async (data, i) => {
       </div>
     </div>
   </div>
-  <Modal v-model="verseExportModal" title="Ayet ve Meal Paylaş">
+  <Modal v-model="verseExportModal">
     <VerseExport :data="data" :surahName="surahName" />
   </Modal>
 </template>
