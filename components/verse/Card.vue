@@ -126,7 +126,8 @@ const handleCopy = async (data, i) => {
   }
 
   &-title {
-    @apply font-arabic text-4xl leading-loose;
+    @apply font-arabic text-4xl max-sm:text-2xl;
+    line-height: 2 !important;
   }
 
   &-action {

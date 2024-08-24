@@ -59,7 +59,7 @@ const exportVerse = async () => {
   <div class="flex items-start gap-5 max-sm:flex-col">
     <div class="flex-wrap gap-5 max-sm:flex sm:w-52">
       <div class="export-option sm:mb-5">
-        <div class="export-option-title">Arkaplan</div>
+        <div class="export-option-title">Arka Plan</div>
         <div class="flex flex-wrap gap-2 sm:gap-4">
           <button
             v-for="pattern in patterns"
@@ -117,7 +117,8 @@ const exportVerse = async () => {
     @apply px-10 pb-4 pt-10 sm:px-20 sm:pb-6 sm:pt-20;
 
     &-title {
-      @apply font-arabic text-2xl leading-loose sm:text-4xl;
+      @apply font-arabic text-4xl max-sm:text-2xl;
+      line-height: 2 !important;
     }
   }
 
@@ -129,12 +130,12 @@ const exportVerse = async () => {
     @apply flex flex-col gap-2.5;
 
     &-title {
-      @apply text-base font-medium;
+      @apply font-medium sm:text-base;
     }
   }
 
   &-color-input {
-    @apply h-6 w-12 cursor-pointer appearance-none rounded-lg border-2 sm:h-8 sm:w-16;
+    @apply h-8 w-8 cursor-pointer appearance-none rounded-lg border-2 sm:h-12 sm:w-12;
 
     &::-webkit-color-swatch-wrapper {
       @apply p-0;
