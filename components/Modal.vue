@@ -5,11 +5,13 @@ const model = defineModel();
 const closeModal = () => {
   model.value = false;
 };
+
+const calculatedScrollTop = computed(() => `${window.scrollY}px`);
 </script>
 
 <template>
   <teleport to="body">
-    <div v-if="model" class="modal">
+    <div v-if="model" class="modal" :style="{ top: calculatedScrollTop }">
       <div
         class="w-full"
         :class="[
