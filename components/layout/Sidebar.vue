@@ -90,7 +90,7 @@ onMounted(async () => {
     @apply rounded px-5 py-2.5;
 
     &.highlight {
-      @apply bg-primary text-white dark:bg-dark-300 dark:text-dark-100;
+      @apply bg-primary text-white dark:bg-dark-800 dark:text-white/70;
     }
   }
 }

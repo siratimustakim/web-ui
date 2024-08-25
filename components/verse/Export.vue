@@ -86,10 +86,10 @@ const exportVerse = async () => {
       <div
         ref="exportVerseEl"
         class="export-preview overflow-hidden"
-        :class="{ 'text-white': exportData.pattern.theme === 'dark' }"
+        :class="{ '!text-white': exportData.pattern.theme === 'dark' }"
         :style="{
           backgroundImage: `url(${exportData.pattern.src})`,
-          color: colorValue,
+          color: `${colorValue} !important`,
         }"
       >
         <div class="export-preview-title mb-10" dir="rtl">
@@ -114,7 +114,7 @@ const exportVerse = async () => {
 <style lang="scss" scoped>
 .export {
   &-preview {
-    @apply px-10 pb-4 pt-10 sm:px-20 sm:pb-6 sm:pt-20;
+    @apply px-10 pb-4 pt-10 dark:text-black sm:px-20 sm:pb-6 sm:pt-20;
 
     &-title {
       @apply font-arabic text-4xl max-sm:text-2xl;

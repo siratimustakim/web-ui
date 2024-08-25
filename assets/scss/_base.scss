@@ -1,5 +1,5 @@
 body {
-  @apply dark:bg-dark dark:text-white/70 bg-body text-sm transition-colors;
+  @apply bg-body text-sm transition-colors dark:bg-dark dark:text-white/70;
 }
 
 input,

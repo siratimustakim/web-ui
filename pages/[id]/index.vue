@@ -153,7 +153,7 @@ onMounted(() => {
       @apply rounded-md px-10 py-2 transition-colors;
 
       &.active {
-        @apply bg-primary text-white dark:bg-dark-300 dark:text-dark-100;
+        @apply bg-primary text-white dark:bg-dark-800 dark:text-white/70;
       }
     }
   }
