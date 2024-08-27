@@ -37,6 +37,7 @@ onMounted(() => {
       </button>
       <ThemeMode />
     </div>
+    <VerseProgress />
   </header>
   <Modal v-model="searchModal" :noContentBg="true" :noHeader="true">
     <button
