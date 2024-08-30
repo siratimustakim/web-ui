@@ -157,7 +157,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .surah {
   &-wrapper {
-    @apply my-6 flex items-start gap-10 px-4 sm:my-16;
+    @apply my-6 flex items-start px-4 sm:my-16 lg:gap-10;
   }
 
   &-tab {
