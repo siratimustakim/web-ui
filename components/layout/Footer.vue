@@ -49,7 +49,7 @@ const menuList = [
           arayüzle sunuyoruz. Kuran'ı Kerim'i keşfetmek için ideal ve güvenilir
           kaynak.
         </p>
-        <p>&copy; 2024 All Rights Reserved</p>
+        <p>&copy; 2024 Tüm hakları saklıdır.</p>
       </div>
       <div class="footer-section">
         <div class="footer-title">Sure</div>

@@ -96,7 +96,7 @@ const handleClose = () => {
 
 <style lang="scss" scoped>
 .search {
-  @apply relative flex items-center gap-5 rounded-lg bg-white pl-5 shadow-xl dark:bg-dark-300 sm:gap-8 sm:pl-8;
+  @apply relative flex items-center gap-5 rounded-lg bg-white pl-5 shadow-xl dark:bg-dark-800 sm:gap-8 sm:pl-8;
 
   &-input {
     @apply h-full w-full flex-1 rounded-lg bg-transparent py-5 pr-5 text-base sm:py-8 sm:pr-8 sm:text-xl;
@@ -106,16 +106,16 @@ const handleClose = () => {
     @apply flex flex-wrap gap-2.5;
 
     &-item {
-      @apply rounded-lg bg-white/10 px-5 py-2 text-white transition-colors dark:text-white/70;
+      @apply rounded-lg bg-white/10 px-5 py-2 text-white transition-colors dark:bg-dark-800 dark:text-white/70;
 
       &:hover {
-        @apply bg-white/20;
+        @apply bg-white/20 dark:bg-dark-800;
       }
     }
   }
 
   &-result {
-    @apply absolute left-0 top-full z-10 w-full translate-y-4 rounded-md bg-white p-6 shadow-xl dark:bg-dark-300;
+    @apply absolute left-0 top-full z-10 w-full translate-y-4 rounded-md bg-white p-6 shadow-xl dark:bg-dark-800;
   }
 
   &-list {

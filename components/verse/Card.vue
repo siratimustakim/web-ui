@@ -67,6 +67,7 @@ const handleCopy = async (data, i) => {
         <button
           type="button"
           class="verse-card-button"
+          title="İndir"
           @click="verseExportModal = true"
         >
           <Icon name="hugeicons:image-download" />
@@ -135,7 +136,7 @@ const handleCopy = async (data, i) => {
   }
 
   &-button {
-    @apply flex h-9 w-9 items-center justify-center rounded-full border border-light text-lg transition-colors dark:border-dark-300 sm:h-12 sm:w-12 sm:text-2xl;
+    @apply flex h-9 w-9 items-center justify-center rounded-full border border-light text-lg transition-colors dark:border-dark-800 sm:h-12 sm:w-12 sm:text-2xl;
 
     &:hover {
       @apply border-primary text-primary;

@@ -38,7 +38,7 @@ const totalVerseCount = computed(() => surahStore.getSurah()?.versesCount);
   }
 
   &-info {
-    @apply absolute right-auto top-full flex h-6 w-20 -translate-y-3 items-center justify-center rounded-full bg-light font-medium transition-all dark:bg-dark-800 max-lg:left-1/2 max-lg:-translate-x-1/2 max-lg:text-[0.75rem] lg:right-10 lg:h-10 lg:w-24 lg:-translate-y-5;
+    @apply absolute top-full flex h-6 w-20 -translate-y-3 items-center justify-center rounded-full bg-light font-medium transition-all dark:bg-dark-800 max-lg:left-1/2 max-lg:-translate-x-1/2 max-lg:text-[0.75rem] lg:right-10 lg:h-10 lg:w-24 lg:-translate-y-5;
   }
 }
 </style>

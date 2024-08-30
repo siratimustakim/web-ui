@@ -32,7 +32,7 @@ useHead({
       {{ currentSurahName }}
       {{ verse.verseNumber }}. Ayet
     </NuxtLink>
-    <VerseCard :data="verse" :noMaxWidth="true" :surahName="currentSurahName" />
+    <VerseCard :data="verse" :surahName="currentSurahName" :noMaxWidth="true" />
   </div>
   <Loader v-else class="py-20" />
 </template>

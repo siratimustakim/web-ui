@@ -57,8 +57,8 @@ const exportVerse = async () => {
 
 <template>
   <div class="flex items-start gap-5 max-sm:flex-col">
-    <div class="flex-wrap gap-5 max-sm:flex sm:w-52">
-      <div class="export-option sm:mb-5">
+    <div class="flex flex-wrap gap-5 sm:w-52">
+      <div class="export-option">
         <div class="export-option-title">Arka Plan</div>
         <div class="flex flex-wrap gap-2 sm:gap-4">
           <button
@@ -82,10 +82,10 @@ const exportVerse = async () => {
         <input v-model="colorValue" type="color" class="export-color-input" />
       </div>
     </div>
-    <div class="flex-1 overflow-hidden rounded-lg">
+    <div class="w-full flex-1 overflow-hidden rounded-lg">
       <div
         ref="exportVerseEl"
-        class="export-preview overflow-hidden"
+        class="export-preview"
         :class="{ '!text-white': exportData.pattern.theme === 'dark' }"
         :style="{
           backgroundImage: `url(${exportData.pattern.src})`,
@@ -118,7 +118,7 @@ const exportVerse = async () => {
 <style lang="scss" scoped>
 .export {
   &-preview {
-    @apply px-10 pb-4 pt-10 dark:text-black sm:px-20 sm:pb-6 sm:pt-20;
+    @apply overflow-hidden px-10 pb-4 pt-10 dark:text-black sm:px-20 sm:pb-6 sm:pt-20;
 
     &-title {
       @apply font-arabic text-4xl max-sm:text-2xl;

@@ -12,7 +12,7 @@ const { surahMedia } = storeToRefs(useSurahStore());
     ></audio>
     <button
       type="button"
-      class="text-xl flex items-center justify-center"
+      class="flex items-center justify-center text-xl"
       @click="closeSurahPlayer"
     >
       <Icon name="icon-park-outline:close" />
@@ -22,14 +22,14 @@ const { surahMedia } = storeToRefs(useSurahStore());
 
 <style lang="scss" scoped>
 .surah-player {
-  @apply flex gap-4 items-center fixed bottom-0 left-1/2 -translate-x-1/2 bg-body rounded-tl-xl rounded-tr-xl w-full max-w-5xl p-4 z-50 shadow-xl border-t border-light dark:bg-dark-300 dark:border-dark-300 border-l border-r;
+  @apply fixed bottom-0 left-1/2 z-50 flex w-full max-w-5xl -translate-x-1/2 items-center gap-4 rounded-tl-xl rounded-tr-xl border-l border-r border-t border-light bg-body p-4 shadow-xl dark:border-dark-800 dark:bg-dark-800;
 
   audio {
-    @apply flex-1 w-full dark:invert;
+    @apply w-full flex-1 dark:invert;
 
     &::-webkit-media-controls-play-button,
     &::-webkit-media-controls-panel {
-      @apply bg-body dark:bg-[#d2d1cc];
+      @apply bg-body dark:bg-[#bebcb4];
     }
   }
 }

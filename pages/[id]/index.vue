@@ -22,11 +22,15 @@ const showSidebar = ref(false);
 const toggleSidebar = ref(true);
 
 const handleSurahDirection = (direction) => {
-  const currentSurahId = Number(route.params.id);
+  let currentSurahId = Number(route.params.id);
 
-  router.push(
-    `/${direction === 'next' ? currentSurahId + 1 : currentSurahId - 1}?verse=1`
-  );
+  if (direction === 'next') {
+    currentSurahId++;
+  } else {
+    currentSurahId--;
+  }
+
+  router.push(`/${currentSurahId}`);
 };
 
 const currentSurahName = computed(() => surahStore.getSurah()?.nameSimple);
@@ -53,7 +57,7 @@ onMounted(() => {
         class="sidebar-toggle-button"
         @click="toggleSidebar = !toggleSidebar"
       >
-        <Icon name="iconoir:menu" />
+        <Icon :name="toggleSidebar ? 'ep:close' : 'hugeicons:menu-05'" />
       </button>
       <Transition name="fade">
         <LayoutSidebar
@@ -108,7 +112,7 @@ onMounted(() => {
             :surahName="currentSurahName"
           />
         </div>
-        <div v-else class="mx-auto max-w-6xl text-4xl leading-loose" dir="rtl">
+        <div v-else class="mx-auto max-w-6xl" dir="rtl">
           <VersePage v-for="verse in verseList" :key="verse.id" :data="verse" />
         </div>
         <div v-if="versePagination" class="surah-more">
@@ -197,6 +201,6 @@ onMounted(() => {
 }
 
 .sidebar-toggle-button {
-  @apply hidden h-12 w-12 items-center justify-center rounded-lg border border-light text-xl dark:border-dark-300 lg:flex;
+  @apply hidden h-12 w-12 items-center justify-center rounded-lg border border-light text-2xl dark:border-dark-800 lg:flex;
 }
 </style>

@@ -8,7 +8,7 @@ const closeModal = () => {
   model.value = false;
 };
 
-const handleScroll = (e) => {
+const handleScroll = () => {
   if (!model.value) {
     modalTopValue.value = window.scrollY;
   }
@@ -27,7 +27,8 @@ onMounted(() => {
           class="w-full"
           :class="[
             {
-              'rounded-lg bg-white p-6 dark:bg-dark sm:p-10': !noContentBg,
+              'rounded-lg bg-white p-6 dark:border dark:border-dark-800 dark:bg-dark-300 sm:p-10':
+                !noContentBg,
             },
             width ? width : 'max-w-5xl',
           ]"
@@ -57,7 +58,7 @@ onMounted(() => {
   @apply absolute left-0 top-0 z-50 flex min-h-screen w-full items-center justify-center p-4;
 
   &-overlay {
-    @apply fixed left-0 top-0 -z-10 h-full w-full bg-gray-900/85;
+    @apply fixed left-0 top-0 -z-10 h-full w-full bg-dark/85;
   }
 
   &-header {

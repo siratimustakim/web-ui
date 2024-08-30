@@ -22,7 +22,7 @@ onMounted(() => {
       { 'sticky-top': isSticky },
       isHomePage
         ? 'border-transparent'
-        : 'border-b border-b-light dark:border-b-dark-300',
+        : 'border-b-light dark:border-b-dark-300',
     ]"
   >
     <div class="container flex items-center gap-4">
@@ -53,7 +53,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .header {
-  @apply sticky top-0 z-20 border-b bg-body py-6 transition-all dark:bg-dark sm:z-40;
+  @apply sticky top-0 z-40 border-b bg-body py-6 transition-all dark:bg-dark;
 
   &.sticky-top {
     @apply border-b-light py-4 dark:border-b-dark-300;
