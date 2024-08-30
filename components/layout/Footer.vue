@@ -1,4 +1,6 @@
 <script setup>
+const { resetVerseData } = useSurahStore();
+
 const menuList = [
   {
     id: '1',
@@ -59,6 +61,7 @@ const menuList = [
             :key="menu.id"
             :to="`/${menu.id}`"
             class="footer-link"
+            @click="resetVerseData"
           >
             {{ menu.name }}
           </NuxtLink>
