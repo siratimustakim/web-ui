@@ -19,6 +19,7 @@ const tabList = ref([
 ]);
 const activeTab = ref(1);
 const showSidebar = ref(false);
+const toggleSidebar = ref(true);
 
 const handleSurahDirection = (direction) => {
   const currentSurahId = Number(route.params.id);
@@ -46,11 +47,23 @@ onMounted(() => {
 
 <template>
   <div class="surah-wrapper">
-    <LayoutSidebar
-      class="sticky top-20 w-full sm:w-80"
-      :class="{ visible: showSidebar }"
-      @close="showSidebar = false"
-    />
+    <div class="sticky top-20 flex items-start gap-4 max-lg:z-50">
+      <button
+        type="button"
+        class="sidebar-toggle-button"
+        @click="toggleSidebar = !toggleSidebar"
+      >
+        <Icon name="iconoir:menu" />
+      </button>
+      <Transition name="fade">
+        <LayoutSidebar
+          v-if="toggleSidebar"
+          class="w-full sm:w-80"
+          :class="{ visible: showSidebar }"
+          @close="showSidebar = false"
+        />
+      </Transition>
+    </div>
     <div class="flex-1">
       <div v-if="verseList.length" class="mb-10 sm:mb-20">
         <div class="surah-tab-title">
@@ -99,8 +112,7 @@ onMounted(() => {
           <VersePage v-for="verse in verseList" :key="verse.id" :data="verse" />
         </div>
         <div v-if="versePagination" class="surah-more">
-          <button
-            type="button"
+          <div
             class="surah-more-button"
             :class="{ 'pointer-events-none': isVerseLoader }"
             @click="surahStore.getVerseList()"
@@ -115,7 +127,7 @@ onMounted(() => {
               class="text-xl sm:text-2xl"
               :class="{ 'animate-spin': isVerseLoader }"
             />
-          </button>
+          </div>
         </div>
       </div>
       <Loader v-else class="py-10 sm:py-48" />
@@ -179,8 +191,12 @@ onMounted(() => {
     }
 
     &-button {
-      @apply flex select-none flex-col items-center justify-center gap-1.5 bg-body px-10 font-medium dark:bg-dark sm:text-base;
+      @apply flex cursor-pointer select-none flex-col items-center justify-center gap-1.5 bg-body px-10 font-medium dark:bg-dark sm:text-base;
     }
   }
+}
+
+.sidebar-toggle-button {
+  @apply hidden h-12 w-12 items-center justify-center rounded-lg border border-light text-xl dark:border-dark-300 lg:flex;
 }
 </style>

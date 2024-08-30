@@ -7,7 +7,7 @@ const totalVerseCount = computed(() => surahStore.getSurah()?.versesCount);
 </script>
 
 <template>
-  <template v-if="totalVerseCount">
+  <template v-if="totalVerseCount && !$route.params.verse">
     <progress
       :value="currentVerseCount"
       :max="totalVerseCount"

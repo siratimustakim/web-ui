@@ -89,25 +89,29 @@ const exportVerse = async () => {
         :class="{ '!text-white': exportData.pattern.theme === 'dark' }"
         :style="{
           backgroundImage: `url(${exportData.pattern.src})`,
-          color: `${colorValue} !important`,
         }"
       >
-        <div class="export-preview-title mb-10" dir="rtl">
-          {{ data.text }}
+        <div :style="{ color: `${colorValue} !important` }">
+          <div class="export-preview-title mb-10" dir="rtl">
+            {{ data.text }}
+          </div>
+          <p class="mb-4 text-base sm:text-lg">
+            {{ data.translations[0]?.text }}
+          </p>
+          <p class="mb-1 sm:text-base">
+            ({{ data.chapterId }}/{{ surahName }}, {{ data.verseNumber }})
+          </p>
+          <p>{{ data.translations[0]?.resourceName }}</p>
         </div>
-        <p class="mb-4 text-base sm:text-lg">
-          {{ data.translations[0]?.text }}
-        </p>
-        <p class="mb-20 sm:text-base">
-          ({{ data.translations[0]?.resourceName }}, {{ surahName }}
-          {{ data.verseNumber }}. Ayet)
-        </p>
-        <div class="text-center">siratimustakim.com</div>
+        <div class="export-preview-copyright mt-20">
+          <img src="/emblem.svg" alt="Emblem" class="w-6" />
+          siratimustakim.com
+        </div>
       </div>
     </div>
   </div>
   <div class="mt-10 flex justify-end">
-    <BaseButton type="button" @click="exportVerse"> Ayeti İndir </BaseButton>
+    <BaseButton type="button" @click="exportVerse"> İndir </BaseButton>
   </div>
 </template>
 
@@ -119,6 +123,10 @@ const exportVerse = async () => {
     &-title {
       @apply font-arabic text-4xl max-sm:text-2xl;
       line-height: 2 !important;
+    }
+
+    &-copyright {
+      @apply flex items-center justify-center gap-1 text-center;
     }
   }
 

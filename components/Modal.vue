@@ -21,32 +21,34 @@ onMounted(() => {
 
 <template>
   <teleport to="body">
-    <div v-if="model" class="modal" :style="{ top: `${modalTopValue}px` }">
-      <div
-        class="w-full"
-        :class="[
-          {
-            'rounded-lg bg-white p-6 dark:bg-dark sm:p-10': !noContentBg,
-          },
-          width ? width : 'max-w-5xl',
-        ]"
-      >
-        <div v-if="!noHeader" class="modal-header mb-6 sm:mb-10">
-          <div v-if="title" class="modal-title">
-            {{ title }}
+    <Transition name="fade">
+      <div v-if="model" class="modal" :style="{ top: `${modalTopValue}px` }">
+        <div
+          class="w-full"
+          :class="[
+            {
+              'rounded-lg bg-white p-6 dark:bg-dark sm:p-10': !noContentBg,
+            },
+            width ? width : 'max-w-5xl',
+          ]"
+        >
+          <div v-if="!noHeader" class="modal-header mb-6 sm:mb-10">
+            <div v-if="title" class="modal-title">
+              {{ title }}
+            </div>
+            <button
+              type="button"
+              class="ml-auto flex items-center text-2xl"
+              @click="closeModal"
+            >
+              <Icon name="uiw:close" />
+            </button>
           </div>
-          <button
-            type="button"
-            class="ml-auto flex items-center text-2xl"
-            @click="closeModal"
-          >
-            <Icon name="uiw:close" />
-          </button>
+          <slot></slot>
         </div>
-        <slot></slot>
+        <div class="modal-overlay" @click="closeModal"></div>
       </div>
-      <div class="modal-overlay" @click="closeModal"></div>
-    </div>
+    </Transition>
   </teleport>
 </template>
 

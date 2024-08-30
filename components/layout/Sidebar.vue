@@ -64,7 +64,7 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .sidebar {
-  @apply left-0 z-30 flex h-[calc(100vh-19.375rem)] flex-col gap-5 overflow-hidden rounded-lg border border-light bg-body p-4 transition-all dark:border-dark-300 dark:bg-dark max-lg:fixed max-lg:top-0 max-lg:h-full max-lg:-translate-x-full max-lg:opacity-0 max-lg:shadow-xl;
+  @apply left-0 flex h-[calc(100vh-19.375rem)] flex-col gap-5 overflow-hidden rounded-lg border border-light bg-body p-4 transition-all dark:border-dark-300 dark:bg-dark max-lg:fixed max-lg:top-0 max-lg:h-full max-lg:-translate-x-full max-lg:opacity-0 max-lg:shadow-xl;
 
   &.visible {
     @apply translate-x-0 opacity-100;
