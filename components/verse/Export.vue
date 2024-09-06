@@ -1,5 +1,5 @@
 <script setup>
-import html2canvas from 'html2canvas';
+import { toPng } from 'html-to-image';
 import slugify from 'slugify';
 
 const props = defineProps(['data', 'surahName']);
@@ -44,8 +44,7 @@ const exportData = ref({
 });
 
 const exportVerse = async () => {
-  const canvas = await html2canvas(exportVerseEl.value);
-  const image = canvas.toDataURL('image/png;base64');
+  const image = await toPng(exportVerseEl.value);
 
   const downloadLink = document.createElement('a');
   downloadLink.href = image;

@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
-    "html2canvas": "^1.4.1",
+    "html-to-image": "^1.11.11",
     "nuxt": "^3.12.2",
     "pinia": "^2.1.7",
     "slugify": "^1.6.6",
