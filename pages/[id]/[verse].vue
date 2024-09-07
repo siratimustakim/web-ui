@@ -3,17 +3,7 @@ const route = useRoute();
 const router = useRouter();
 
 const surahStore = useSurahStore();
-const { verseList, versePagination } = storeToRefs(surahStore);
-
-const calculatePageNumber = computed(() => Math.ceil(route.params.verse / 10));
-
-const currentSurahName = computed(() => surahStore.getSurah()?.nameSimple);
-
-const verse = computed(
-  () =>
-    verseList.value &&
-    verseList.value.find((verse) => verse.verseNumber == route.params.verse)
-);
+const { verse } = storeToRefs(surahStore);
 
 const handleSurahDirection = (direction) => {
   const currentSurahId = Number(route.params.id);
@@ -28,10 +18,6 @@ const handleSurahDirection = (direction) => {
   router.push(`/${currentSurahId}/${currentVerseId}`);
 };
 
-versePagination.value = calculatePageNumber.value;
-surahStore.getVerseList();
-surahStore.getSurahList();
-
 const handleKeydown = (e) => {
   if (e.code === 'ArrowLeft' && route.params.verse > 1) {
     handleSurahDirection();
@@ -39,14 +25,16 @@ const handleKeydown = (e) => {
 
   if (
     e.code === 'ArrowRight' &&
-    route.params.verse != surahStore.getSurah()?.versesCount
+    route.params.verse != verse.value?.chapterVerseCount
   ) {
     handleSurahDirection('next');
   }
 };
 
+surahStore.getVerse();
+
 useHead({
-  title: `${currentSurahName.value} ${route.params.verse}. Ayeti ve Meali`,
+  title: `${verse.value?.chapterName} ${route.params.verse}. Ayeti ve Meali`,
 });
 
 onMounted(() => {
@@ -60,10 +48,14 @@ onMounted(() => {
       :to="`/${verse.chapterId}`"
       class="mb-10 block text-center text-xl font-medium sm:mb-20"
     >
-      {{ currentSurahName }}
+      {{ verse.chapterName }}
       {{ verse.verseNumber }}. Ayet
     </NuxtLink>
-    <VerseCard :data="verse" :surahName="currentSurahName" :noMaxWidth="true" />
+    <VerseCard
+      :data="verse"
+      :surahName="verse.chapterName"
+      :noMaxWidth="true"
+    />
     <div class="flex justify-center gap-5">
       <BaseButton
         v-if="route.params.verse > 1"

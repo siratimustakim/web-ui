@@ -2,6 +2,7 @@ export const useSurahStore = defineStore('surahStore', {
   state: () => ({
     surahMedia: null,
     surahList: null,
+    verse: null,
     verseList: [],
     searchChapterList: [],
     searchVerseList: [],
@@ -80,6 +81,17 @@ export const useSurahStore = defineStore('surahStore', {
         this.searchChapterList = [];
         this.searchVerseList = [];
       }
+    },
+    async getVerse() {
+      const route = useRoute();
+
+      const {
+        data: { value },
+      } = await useFetchApi(
+        `/Verse/GetVerseById?chapter_id=${route.params.id}&verse_id=${route.params.verse}`
+      );
+
+      this.verse = value;
     },
   },
 });
