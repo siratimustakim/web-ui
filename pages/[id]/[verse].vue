@@ -1,5 +1,6 @@
 <script setup>
 const route = useRoute();
+const router = useRouter();
 
 const surahStore = useSurahStore();
 const { verseList, versePagination } = storeToRefs(surahStore);
@@ -13,6 +14,19 @@ const verse = computed(
     verseList.value &&
     verseList.value.find((verse) => verse.verseNumber == route.params.verse)
 );
+
+const handleSurahDirection = (direction) => {
+  const currentSurahId = Number(route.params.id);
+  let currentVerseId = Number(route.params.verse);
+
+  if (direction === 'next') {
+    currentVerseId++;
+  } else {
+    currentVerseId--;
+  }
+
+  router.push(`/${currentSurahId}/${currentVerseId}`);
+};
 
 versePagination.value = calculatePageNumber.value;
 surahStore.getVerseList();
@@ -33,6 +47,21 @@ useHead({
       {{ verse.verseNumber }}. Ayet
     </NuxtLink>
     <VerseCard :data="verse" :surahName="currentSurahName" :noMaxWidth="true" />
+    <div class="flex justify-center gap-5">
+      <BaseButton
+        v-if="route.params.verse > 1"
+        secondary
+        @click="handleSurahDirection"
+      >
+        Önceki Ayet
+      </BaseButton>
+      <BaseButton
+        v-if="route.params.verse != surahStore.getSurah()?.versesCount"
+        @click="handleSurahDirection('next')"
+      >
+        Sonraki Ayet
+      </BaseButton>
+    </div>
   </div>
   <Loader v-else class="py-20" />
 </template>
