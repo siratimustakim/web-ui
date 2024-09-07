@@ -31,10 +31,11 @@ const handleKeydown = (e) => {
   }
 };
 
+surahStore.getSurahList();
 surahStore.getVerse();
 
 useHead({
-  title: `${verse.value?.chapterName} ${route.params.verse}. Ayeti ve Meali`,
+  title: `${surahStore.getSurah()?.nameSimple} ${route.params.verse}. Ayeti ve Meali`,
 });
 
 onMounted(() => {
