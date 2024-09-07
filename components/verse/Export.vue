@@ -91,6 +91,13 @@ const exportVerse = async () => {
         }"
       >
         <div :style="{ color: `${colorValue} !important` }">
+          <div
+            v-if="!['1', '9'].includes($route.params.id)"
+            class="mb-10 font-arabic text-2xl sm:text-4xl"
+            dir="rtl"
+          >
+            بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+          </div>
           <div class="export-preview-title mb-10" dir="rtl">
             {{ data.text }}
           </div>

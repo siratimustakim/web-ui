@@ -32,8 +32,25 @@ versePagination.value = calculatePageNumber.value;
 surahStore.getVerseList();
 surahStore.getSurahList();
 
+const handleKeydown = (e) => {
+  if (e.code === 'ArrowLeft' && route.params.verse > 1) {
+    handleSurahDirection();
+  }
+
+  if (
+    e.code === 'ArrowRight' &&
+    route.params.verse != surahStore.getSurah()?.versesCount
+  ) {
+    handleSurahDirection('next');
+  }
+};
+
 useHead({
   title: `${currentSurahName.value} ${route.params.verse}. Ayeti ve Meali`,
+});
+
+onMounted(() => {
+  document.addEventListener('keydown', handleKeydown);
 });
 </script>
 
